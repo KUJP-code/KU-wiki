@@ -1,0 +1,19 @@
+---
+title: Page Creation
+description: Get started without going through the Starlight documentation
+tableOfContents: false
+---
+
+Creating a page in Astro Starlight is as follows:
+
+1. Create a .md or .mdx file in the necessary directory in src/content/docs/
+	* It is stongly advised to keep the file in a directory, not in the /docs/ directory itself
+2. Write the necessary information in the new file
+	* Ensure that the new file has a frontmatter section (See [Starlight Frontmatter Documentation here](https://starlight.astro.build/reference/frontmatter/)). Title and description is the minimum. Note that Starlight will automatically use the frontmatter title on the guide page.
+3. Save the file in the repository
+	* Note: Confirm with admin before merging the repository
+4. Add links to the new page
+	* Starlight automatically creates the page, but the page will need some easier access
+	1. Edit src/content/docs/index.mdx to add a link to the new page
+	2. Edit astro.config.js in **the root directory** to include the new page in the sidebar when accessing guides
+		* Format for adding to the sidebar is commented in the .js file
