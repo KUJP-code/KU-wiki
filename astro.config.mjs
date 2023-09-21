@@ -5,9 +5,9 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "My Docs",
+      title: "KidsUP Wiki",
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/Brett-Tanner/KU-wiki",
       },
       sidebar: [
         {
@@ -15,8 +15,24 @@ export default defineConfig({
           autogenerate: { directory: "guides" },
         },
         {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
+          label: "AWS",
+          autogenerate: { directory: "aws" },
+        },
+        {
+          label: "Rails",
+          autogenerate: { directory: "rails" },
+        },
+        {
+          label: "Models",
+          autogenerate: { directory: "models" },
+        },
+        {
+          label: "Controllers",
+          autogenerate: { directory: "controllers" },
+        },
+        {
+          label: "Views",
+          autogenerate: { directory: "views" },
         },
       ],
     }),

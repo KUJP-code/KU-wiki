@@ -6,7 +6,7 @@ editUrl: false
 
 ## Getting started
 
-- `npm run dev` from the project folder will build your site, update on any changes and make it available at [http://localhost:3000/](http://localhost:3000/)
+- We're using `pnpm` rather than `npm` as our package manager now, because `npm` was filling my HDD with useless duplicate packages
 
 ## Fun Markdown features
 
