@@ -10,13 +10,13 @@ RDS has automatic settings for these, they seem to be fine so far. Apparently ca
 
 If you need a quick way to check the dead tuple/vacuum/analyze stats, open up a Rails console session through SSH and use
 
-```Ruby
+```ruby
 ActiveRecord::Base.connection.exec_query("")
 ```
 
 with
 
-```SQL
+```sql
 SELECT
 relname AS TableName
 ,n_live_tup AS LiveTuples
