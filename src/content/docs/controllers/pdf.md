@@ -513,8 +513,6 @@ It can also be used by passing a font name and a block. In this case the specifi
 
 The default font is Helvetica.
 
-It's possible Japanese characters might not be renderable with the built-in PDF fonts, in which case I'll need to use an external font.
-
 ```ruby
 text "Let's see which font we are using: #{font.inspect}"
 
@@ -626,6 +624,20 @@ text 'This an external link to the ' \
 "<u><link href='https://github.com/prawnpdf/prawn/wiki'>Prawn wiki" \
 '</link></u>',
 inline_format: true
+```
+
+### Japanese Characters
+
+Japanese characters can't be rendered by default, which is a bit of a problem for a Japanese company issuing invoices in Japanese. So you need to import a font with Japanese glyphs like [NotoSans](https://fonts.google.com/noto/specimen/Noto+Sans+JP?query=japanese), put it in `assets/fonts`, then access and use it in your PDF generation like:
+
+```ruby
+pdf = Prawn::Document.new
+pdf.font_families.update(
+    'NotoSans' => {
+    normal: Rails.root.join('app/assets/fonts/NotoSansJP-Medium.ttf')
+    }
+)
+pdf.font('NotoSans')
 ```
 
 ### Positioned Text
