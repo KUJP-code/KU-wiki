@@ -24,16 +24,20 @@ export default defineConfig({
           autogenerate: { directory: "aws" },
         },
         {
-          label: "Rails",
-          autogenerate: { directory: "rails" },
+          label: "Controllers",
+          autogenerate: { directory: "controllers" },
         },
         {
           label: "Models",
           autogenerate: { directory: "models" },
         },
         {
-          label: "Controllers",
-          autogenerate: { directory: "controllers" },
+          label: "Rails",
+          autogenerate: { directory: "rails" },
+        },
+        {
+          label: "Setsumeikai Calendar",
+          autogenerate: { directory: "setsumeikai" },
         },
         {
           label: "Views",
