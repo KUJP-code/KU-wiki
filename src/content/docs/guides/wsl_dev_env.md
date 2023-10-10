@@ -1,5 +1,5 @@
 ---
-title: WSL Dev Environment Setup
+title: WSL Setup
 description: A guide on setting up your dev environment to contribute to the registration site, in the Windows Subsystem for Linux (WSL).
 editUrl: false
 ---
