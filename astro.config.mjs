@@ -14,34 +14,53 @@ export default defineConfig({
       social: {
         github: "https://github.com/Brett-Tanner/KU-wiki",
       },
+      favicon: "/public/favicon.svg",
       sidebar: [
         {
           label: "Guides",
+          collapsed: true,
           autogenerate: { directory: "guides" },
         },
         {
-          label: "AWS",
-          autogenerate: { directory: "aws" },
-        },
-        {
-          label: "Controllers",
-          autogenerate: { directory: "controllers" },
-        },
-        {
-          label: "Models",
-          autogenerate: { directory: "models" },
-        },
-        {
-          label: "Rails",
-          autogenerate: { directory: "rails" },
+          label: "Registration Site",
+          collapsed: true,
+          items: [
+            {
+              label: "Overview",
+              collapsed: true,
+              link: "/registration_overview",
+            },
+            {
+              label: "AWS",
+              collapsed: true,
+              autogenerate: { directory: "aws" },
+            },
+            {
+              label: "Controllers",
+              collapsed: true,
+              autogenerate: { directory: "controllers" },
+            },
+            {
+              label: "Models",
+              collapsed: true,
+              autogenerate: { directory: "models" },
+            },
+            {
+              label: "Rails",
+              collapsed: true,
+              autogenerate: { directory: "rails" },
+            },
+            {
+              label: "Views",
+              collapsed: true,
+              autogenerate: { directory: "views" },
+            },
+          ],
         },
         {
           label: "Setsumeikai Calendar",
+          collapsed: true,
           autogenerate: { directory: "setsumeikai" },
-        },
-        {
-          label: "Views",
-          autogenerate: { directory: "views" },
         },
       ],
     }),
