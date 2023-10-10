@@ -10,7 +10,7 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: "KidsUP Wiki",
+      title: "KU-Docs",
       social: {
         github: "https://github.com/Brett-Tanner/KU-wiki",
       },
