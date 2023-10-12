@@ -46,11 +46,6 @@ export default defineConfig({
               autogenerate: { directory: "models" },
             },
             {
-              label: "Rails",
-              collapsed: true,
-              autogenerate: { directory: "rails" },
-            },
-            {
               label: "Views",
               collapsed: true,
               autogenerate: { directory: "views" },
