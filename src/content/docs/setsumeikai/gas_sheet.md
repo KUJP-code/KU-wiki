@@ -106,27 +106,27 @@ Before running any of them the current spreadsheet and its ID are set as global 
 
 Basically all of these just get the function of the same name from `kidsCustomerGAS`, bind it to a local variable, call that function with with the current sheet id as an argument then log the result.
 
-#### backSetsumeikaiMeibo
+### backSetsumeikaiMeibo()
 
 Seems to add the followup status to the mysterious 'Briefing List' sheet daily at 9pm.
 
-#### createRecordMain
+### createRecordMain()
 
 Creates something in the school's spreadsheet, presumably entries for any new inquiries? Runs daily between 4 and 5pm.
 
-#### createSetsumeikaiMeibo
+### createSetsumeikaiMeibo()
 
 Creates something in the 'Briefing list' spreadsheet, maybe a separate one to the school-specific one? Runs daily between 3 and 4pm.
 
-#### getCustomer
+### getCustomer()
 
 Gets new inquiries from wherever they're currently stored after being made, runs hourly.
 
-#### getSchool
+### getSchool()
 
 Updates the master list of schools, scheduled to run every Monday.
 
-#### onOpen
+### onOpen()
 
 Uses `moveLast` from `kidscustomerGAS` to move to the bottom of the sheet, then according to the comment, creates a 'Script' menu so PDF creation functions can be executed from the spreadsheet. However the functions passed are `createRecordMain` and `getCustomer`, and the names associated with them don't match the green buttons. Also there are 3 green buttons and only two items passed to `addMenu`. Not sure where this menu is if it exists.
 
@@ -243,6 +243,18 @@ If the `counts` key of the response == 0, logs a message that the request succee
 Finally, returns `responseJSON` to be logged by the school sheet's `Main.gs`.
 
 ##### getSchool(\_in_spread_id)
+
+Calls `setGrobal`.
+
+Gets a list of schools from the `api_kids_get_school` endpoint, parses it and assigns the `result` key of the response json to `results`.
+
+`o_data` is initialized as an empty array, `mst` is set to `マスタ.getDataRange().getValues();` (again, this seems to happen a lot despite it being global).
+
+For each of the schools in `result`, if it matches the school name in any of the rows in `mst` return. Else, push the school name that's not in `mst` to `arr`, which is then pushed to `o_data`.
+
+If `o_data` is empty at this point (because the schools are all present in `mst`), the function returns.
+
+Otherwise, the unregistered schools are added to `mst` and also some stuff is done with folders.
 
 ##### createRecordMain(\_in_spread_id)
 

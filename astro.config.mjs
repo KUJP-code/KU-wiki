@@ -14,7 +14,7 @@ export default defineConfig({
       social: {
         github: "https://github.com/Brett-Tanner/KU-wiki",
       },
-      favicon: "/public/favicon.svg",
+      favicon: "/favicon.svg",
       sidebar: [
         {
           label: "Guides",
