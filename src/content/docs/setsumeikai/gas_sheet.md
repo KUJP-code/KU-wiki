@@ -54,7 +54,7 @@ C - Name (probably the child's)
 
 D - Guardian (this would be the parent's name)
 
-E- Medical records??? Some rows have a link to another sheets file here, others have a Kanji that translates to 'Done'
+E - A link to the generated PDF or Kanji saying it's done
 
 F - Phone number
 
@@ -106,27 +106,27 @@ Before running any of them the current spreadsheet and its ID are set as global 
 
 Basically all of these just get the function of the same name from `kidsCustomerGAS`, bind it to a local variable, call that function with with the current sheet id as an argument then log the result.
 
-### backSetsumeikaiMeibo()
+#### backSetsumeikaiMeibo()
 
 Seems to add the followup status to the mysterious 'Briefing List' sheet daily at 9pm.
 
-### createRecordMain()
+#### createRecordMain()
 
 Creates something in the school's spreadsheet, presumably entries for any new inquiries? Runs daily between 4 and 5pm.
 
-### createSetsumeikaiMeibo()
+#### createSetsumeikaiMeibo()
 
 Creates something in the 'Briefing list' spreadsheet, maybe a separate one to the school-specific one? Runs daily between 3 and 4pm.
 
-### getCustomer()
+#### getCustomer()
 
 Gets new inquiries from wherever they're currently stored after being made, runs hourly.
 
-### getSchool()
+#### getSchool()
 
 Updates the master list of schools, scheduled to run every Monday.
 
-### onOpen()
+#### onOpen()
 
 Uses `moveLast` from `kidscustomerGAS` to move to the bottom of the sheet, then according to the comment, creates a 'Script' menu so PDF creation functions can be executed from the spreadsheet. However the functions passed are `createRecordMain` and `getCustomer`, and the names associated with them don't match the green buttons. Also there are 3 green buttons and only two items passed to `addMenu`. Not sure where this menu is if it exists.
 
@@ -258,6 +258,22 @@ Otherwise, the unregistered schools are added to `mst` and also some stuff is do
 
 ##### createRecordMain(\_in_spread_id)
 
+Calls `setGrobal`.
+
+Assigns the contents of the inquiry input sheet to `data` and the contents of the additional information sheet to `data_sub`.
+
+`data_sub` is then iterated over with `forEach`, and each row is repeatedly assigned to the `data[0]` key of `arr_sub` (again, not an array, again, only the last value would be retained??)
+
+The following is done for each inquiry in `data`
+
+- If a PDF has been generated for the inquiry or there's no setsumeikai scheduled for them, skip and go to the next inquiry.
+- `ss.getSheetByName('問合記録表_雛形')` (the template sheet of the current spreadsheet, the 3rd one) is assigned to the `雛形` (prototype) variable
+- Information from the inquiry (and associated `arr_sub`) is used to fill in the template sheet (`雛形`)
+- Initializes a `pdfFlg` to false, then sets it true if a PDF has already been generated.
+- If the flag is true, go next and don't generate a PDF. Also don't generate a PDF if the setsumeikai date was in the past.
+- If `pdfFlg` is false a PDF is generated with `createRecord()` (from `PDF作成.gs`) with column 12 of the inquiry as an argument (that's the column with the name of the school the reservation is for).
+- A URL to the PDF is added to the sheet, seems to have a different symbol based on whether additional info was provided **THIS IS THE 'MEDICAL RECORDS' THING, IT'S ACTUALLY THE GENERATED PDF**
+
 ##### createSetsumeikaiMeibo(\_in_spread_id)
 
 ##### moveLast(\_in_spread_id)
@@ -284,7 +300,7 @@ In each iteration, the following occurs:
   - created_at: the day of (union?)
   - name_child
   - name (parent's)
-  - '' (an empty string for the medical records column)
+  - '' (an empty string for the PDF generated column)
   - tel
   - email
   - body (the details I noticed in the inquiry sheet and thought might be from the text area/optional fields)
