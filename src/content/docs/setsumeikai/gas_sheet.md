@@ -7,6 +7,220 @@ Hopefully we're going to replace this entirely, but we'll likely have to work wi
 
 Docs for Google App Script are [here](https://developers.google.com/apps-script), you probably want the Guides or Reference tab.
 
+## API
+
+### Endpoints
+
+#### [https://inquiry.kids-up.jp/v1/get/customer]([https://inquiry.kids-up.jp/v1/get/customer)
+
+##### Response JSON
+
+```json
+{
+  "statusCode": 200,
+  "message": "ok",
+  "results": [
+    {
+      "id": 11854,
+      "name": "test name",
+      "tel": "test phone",
+      "email": "test_email@gmail.com",
+      "age": "その他",
+      "body": "test requests\r\nhello\r\nI have several requests\r\nthey are all very important",
+      "event_id": "5640",
+      "school_id": "41",
+      "school_name": "KidsUP大倉山",
+      "created_at": "2023-10-31 14:09:04",
+      "updated_at": "2023-10-31 14:09:04",
+      "send_flg": null,
+      "name_child": "test child name",
+      "birth": "2008-01-01",
+      "hash_id": "9p2419p24gOqc9Ts19p24Z2yMjddHj03QU5C9p2FWbLLOE0",
+      "attend": null,
+      "kinder_attend": "test kindy",
+      "primary_attend": "test ele school",
+      "start_season": "test start date",
+      "trigger": "資料",
+      "category": "R",
+      "event_schedule": {
+        "event_id": 5640,
+        "date": "2023-11-25",
+        "time": "10:00",
+        "school_id": "41",
+        "release_date": "2023-10-15",
+        "status": "public",
+        "relational_school": "#41#",
+        "created_at": "2023-10-14 14:49:07",
+        "updated_at": "2023-10-14 14:49:07",
+        "restrict": "",
+        "capacity": 8,
+        "taiken": "on"
+      }
+    }
+  ],
+  "counts": 1
+}
+```
+
+##### o_data
+
+This is what's actually written to the '問合入力' sheet.
+
+```js
+[
+  [
+    "R11854",
+    "2023-10-31 14:09:04",
+    "test child name",
+    "test name",
+    "",
+    "test phone",
+    "test_email@gmail.com",
+    "きっかけ：資料\n希望時期：test start date\n小学校状況：test ele school\n在園状況：test kindy\ntest requests\r\nhello\r\nI have several requests\r\nthey are all very important",
+    "",
+    "その他",
+    "2023-11-25",
+    "10:00",
+    "大倉山",
+  ],
+];
+```
+
+With the JSON response values subbed in looks like:
+
+```js
+[
+  [
+    `${category}${id}`,
+    created_at, // from the inquiry, not the event object
+    name_child,
+    name,
+    "", // always a blank string, not from the API response. This is where the link to the PDF will go when generated
+    tel,
+    email,
+    body,
+    "", // always a blank string, not from the API response. This is where the SM can add follow-up details
+    age,
+    event_schedule.date,
+    event_schedule.time,
+    school_name.replace(/KidsUP/g, ""),
+  ],
+];
+```
+
+##### o_data_sub
+
+This is child info, written to the '付加情報' sheet.
+
+```js
+[["R11854", "2023-10-31 14:09:04", "test child name", "", "2008-01-01", ""]];
+```
+
+#### [https://inquiry.kids-up.jp/v1/update](https://inquiry.kids-up.jp/v1/update)
+
+##### updateFlgMain POST
+
+Submits after new inquiries are fetched, presumably updates the `send_flg` col in the database.
+
+```json
+[
+  {
+    "category": "R",
+    "id": "11854"
+  }
+]
+```
+
+#### [https://inquiry.kids-up.jp/v1/get/school](https://inquiry.kids-up.jp/v1/get/school)
+
+Just returns an array of school objects in the `results` key. Each school object has `school_name` and `email` keys.
+
+```json
+{
+  "statusCode": 200,
+  "message": "ok",
+  "results": [
+    { "school_name": "池袋", "email": "m-tanaka@kids-up.jp" },
+    { "school_name": "川口", "email": "m-tanaka@kids-up.jp" },
+    {
+      "school_name": "武蔵小杉",
+      "email": "musashikosugi@kids-up.jp"
+    },
+    {
+      "school_name": "武蔵新城",
+      "email": "musashishinjo@kids-up.jp"
+    },
+    { "school_name": "大倉山", "email": "ookurayama@kids-up.jp" },
+    { "school_name": "馬込", "email": "magome@kids-up.jp" },
+    { "school_name": "鷺宮", "email": "saginomiya@kids-up.jp" },
+    {
+      "school_name": "ソコラ南行徳",
+      "email": "minamigyotoku@kids-up.jp"
+    },
+    {
+      "school_name": "りんかい東雲",
+      "email": "rinkaishinonome@kids-up.jp"
+    },
+    { "school_name": "矢向", "email": "yako@kids-up.jp" },
+    { "school_name": "溝の口", "email": "mizonokuchi@kids-up.jp" },
+    {
+      "school_name": "北品川",
+      "email": "kitashinagawa@kids-up.jp"
+    },
+    { "school_name": "赤羽", "email": "akabane@kids-up.jp" },
+    { "school_name": "四谷", "email": "yotsuya@kids-up.jp" },
+    { "school_name": "晴海", "email": "harumi@kids-up.jp" },
+    { "school_name": "大井", "email": "kidsup-oi@kids-up.jp" },
+    {
+      "school_name": "南町田グランベリーパーク",
+      "email": "minami-machida@kids-up.jp"
+    },
+    { "school_name": "天王町", "email": "tennocho@kids-up.jp" },
+    { "school_name": "二俣川", "email": "futamatagawa@kids-up.jp" },
+    { "school_name": "三鷹", "email": "mitaka@kids-up.jp" },
+    { "school_name": "新浦安", "email": "shin-urayasu@kids-up.jp" },
+    { "school_name": "大島", "email": "ojima@kids-up.jp" },
+    { "school_name": "等々力", "email": "todoroki@kids-up.jp" },
+    {
+      "school_name": "新川崎",
+      "email": "shin-kawasaki@kids-up.jp"
+    },
+    { "school_name": "早稲田", "email": "waseda@kids-up.jp" },
+    { "school_name": "大森", "email": "omori@kids-up.jp" },
+    { "school_name": "成城", "email": "seijo@kids-up.jp" },
+    { "school_name": "戸越", "email": "togoshi@kids-up.jp" },
+    {
+      "school_name": "門前仲町",
+      "email": "monnaka@kids-up.jp"
+    },
+    { "school_name": "長原", "email": "nagahara@kids-up.jp" },
+    { "school_name": "東陽町", "email": "toyocho@kids-up.jp" },
+    { "school_name": "池上", "email": "ikegami@kids-up.jp" },
+    {
+      "school_name": "蒲田駅前",
+      "email": "j-kamata@kids-up.jp"
+    },
+    {
+      "school_name": "田園調布雪谷",
+      "email": "d-yukigaya@kids-up.jp"
+    }
+  ]
+}
+```
+
+#####
+
+### Params
+
+`accessKey` is in the sheet.
+
+```js
+var options = {
+  method: "post",
+  muteHttpExceptions: true,
+};
+```
+
 ## Spreadsheet
 
 ### Sheet 1 - 問合入力 - Query Input
@@ -62,7 +276,7 @@ G - Email
 
 H - Inquiry details (this might be where the text area on the form goes, also could be a dumping ground for stuff put in the various optional fields)
 
-I - Followup details (seems to be SM notes on how the inquiry is progressing)
+I - Follow-up details (seems to be SM notes on how the inquiry is progressing)
 
 J - Their grade at school
 
@@ -72,7 +286,7 @@ N-O - Individual interviews/trials. Columns are date and time
 
 P-U - The expected date of certain events. From L-R waiting for interview, waiting for trial, waiting for theory A, waiting for reply, need TEL and waiting for procedure.
 
-V-AE - Fixed dates for certain events. From L-R enrollment, reservation membership, external student, followup, not seen yet, interview date, feeling lost???, cancel reservation, outside area, cooling off
+V-AE - Fixed dates for certain events. From L-R enrollment, reservation membership, external student, follow-up, not seen yet, interview date, feeling lost???, cancel reservation, outside area, cooling off
 
 AF-AU - Medium the inquiry was received through. From L-R introduction/reviews, kidsHP, search engine, other web, posting, town plus, arrangements, leaflet, look at school, look at the bus, youtube, Facebook, Insta, insert, town magazine, other. These are just marked with 1s, so booleans.
 
@@ -108,7 +322,7 @@ Basically all of these just get the function of the same name from `kidsCustomer
 
 #### backSetsumeikaiMeibo()
 
-Seems to add the followup status to the mysterious 'Briefing List' sheet daily at 9pm.
+Seems to add the follow-up status to the mysterious 'Briefing List' sheet daily at 9pm.
 
 #### createRecordMain()
 
@@ -226,6 +440,10 @@ Assigns all data from the master sheet to `school_mst`, which is not used before
 
 ##### getCustomer(\_in_spread_id)
 
+Gets any new inquiries from the DB, prints them to the sheet that requested the update, then sends a response back to the DB marking those inquiries as received so they're not resent.
+
+###### Walkthrough
+
 Calls `setGrobal`
 
 Sets the 'payload' key of the global `options` object to the `param_customer` global.
@@ -258,6 +476,10 @@ Otherwise, the unregistered schools are added to `mst` and also some stuff is do
 
 ##### createRecordMain(\_in_spread_id)
 
+Seems to be the function that handles creating the attendance list and PDFs for a given setsumeikai.
+
+###### Walkthrough
+
 Calls `setGrobal`.
 
 Assigns the contents of the inquiry input sheet to `data` and the contents of the additional information sheet to `data_sub`.
@@ -286,6 +508,8 @@ Seems to contain stuff used in a lot of different scripts/functions
 
 The purpose of this one seems to be adding inquiries to the school's inquiry data sheet from the API response.
 
+###### Walkthrough
+
 `o_data` and `o_data_sub` are initialized as empty arrays.
 
 `results` is an array of inquiries, iterated over and mutated with `forEach`. In `forEach`, each inquiry is referred to as `data`.
@@ -304,7 +528,7 @@ In each iteration, the following occurs:
   - tel
   - email
   - body (the details I noticed in the inquiry sheet and thought might be from the text area/optional fields)
-  - '' (an empty string for the followup status column)
+  - '' (an empty string for the follow-up status column)
   - age
   - reservation date, time and school from the local variables set above
 - The following keys from `data` (the inquiry) are added to `arr_sub` in the following order, than `arr_sub` is pushed to `o_data_sub`
@@ -319,6 +543,10 @@ Eventually the data processed while iterating over `results` is pushed to `o_dat
 `o_data` is passed to `updateFlagMain`, which seems to update whether the inquiries have been recorded in the sheet and mark them as not needing to be sent anymore. The return value of that function is assigned to `responseJson`, which is printed to the log.
 
 #### updateFlagMain(o_data)
+
+Called during `getCustomer` to let the DB know which inquiries were received.
+
+###### Walkthrough
 
 An empty `update` array is initialized.
 
