@@ -15,6 +15,8 @@ Docs for Google App Script are [here](https://developers.google.com/apps-script)
 
 ##### Response JSON
 
+`counts` is important, if it's 0 nothing will be written to the sheet.
+
 ```json
 {
   "statusCode": 200,
@@ -65,6 +67,8 @@ Docs for Google App Script are [here](https://developers.google.com/apps-script)
 ##### o_data
 
 This is what's actually written to the '問合入力' sheet.
+
+You also need `kinder_attend`, `primary_attend`, `start_season`, `trigger` and `attend` so they can be added to `body`.
 
 ```js
 [
