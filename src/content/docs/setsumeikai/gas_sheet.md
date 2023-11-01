@@ -127,13 +127,44 @@ This is child info, written to the '付加情報' sheet.
 Submits after new inquiries are fetched, presumably updates the `send_flg` col in the database.
 
 ```json
-[
+"accessKey": accessKey,
+"update": [
   {
     "category": "R",
     "id": "11854"
+  },
+  {
+    "category": "R",
+    "id": "3"
   }
 ]
 ```
+
+It's serialized like this by GAS, so we need to parse the value of `update` as JSON to get anything useful:
+
+```json
+{"accessKey"=>"", "update"=>"[{\"category\":\"R\",\"id\":\"2\"},{\"category\":\"R\",\"id\":\"3\"}]"}
+```
+
+Expects a response like this:
+
+```json
+{
+  "statusCode": 200,
+  "message": "ok",
+  "results": "ok",
+  "process": "HPデータ連携",
+  "total": 2,
+  "r_success": 2,
+  "i_success": 0,
+  "detail": [
+    { "category": "説明会", "id": "2", "target": null },
+    { "category": "説明会", "id": "3", "target": null }
+  ]
+}
+```
+
+Target should be the name of the child from the inquiry.
 
 #### [https://inquiry.kids-up.jp/v1/get/school](https://inquiry.kids-up.jp/v1/get/school)
 
