@@ -5,6 +5,10 @@ description: Explains how to set up a local dev environment for this project.
 
 ## WP Environment
 
+:::caution
+You probably don't need this bit, was just so I could check ReactPress actually worked. Unless it's very important to test something in the context of the WP site, just follow the [react environment](#react-environment) instructions below but clone the repo wherever you like.
+:::
+
 Download and install [LocalWP](https://localwp.com/) to run kids-up.jp locally.
 
 Create a new site using the same PHP/MySQL version as the live site, the default/latest should be fine since Mike seems to do a good job of keeping it up to date.
