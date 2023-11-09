@@ -15,13 +15,13 @@ Only setsumeikais for the selected school are displayed.
 
 ![Old school list](../../../../public/old_school_list.png)
 
-![Old school list mobile]
+![Old school list mobile](../../../../public/old_school_list_mobile.png)
 
 #### New
 
-![New school list]
+![New school list](../../../../public/new_school_list.png)
 
-![New school list mobile]
+![New school list mobile](../../../../public/new_school_list_mobile.png)
 
 ### Calendar
 
@@ -33,37 +33,53 @@ Only setsumeikais for the selected school are displayed.
 
 #### New
 
-![New calendar]
+![New calendar](../../../../public/new_calendar.png)
 
-![New calendar mobile]
+![New calendar mobile](../../../../public/new_calendar_mobile.png)
 
 ### Form
 
 #### Old
 
-![Old form](../../../../public/old_form.png)
+![Old form](../../../../public/old_form_1.png)
 
-![Old form mobile]
+![Old form](../../../../public/old_form_2.png)
+
+![Old form mobile 1](../../../../public/old_form_mobile_1.png)
+
+![Old form mobile 2](../../../../public/old_form_mobile_2.png)
+
+![Old form mobile 3](../../../../public/old_form_mobile_3.png)
 
 #### New
 
-![New form]
+![New form](../../../../public/new_form.png)
 
-![New form mobile]
+![New form mobile 1](../../../../public/new_form_mobile_1.png)
+
+![New form mobile 2](../../../../public/new_form_mobile_2.png)
+
+![New form mobile 3](../../../../public/new_form_mobile_3.png)
 
 ### Summary
 
 #### Old
 
-![Old summary]
+![Old summary](../../../../public/old_summary_1.png)
 
-![Old summary mobile]
+![Old summary](../../../../public/old_summary_2.png)
+
+![Old summary mobile](../../../../public/old_summary_mobile_1.png)
+
+![Old summary mobile](../../../../public/old_summary_mobile_2.png)
 
 #### New
 
-![New summary]
+![New summary](../../../../public/new_summary.png)
 
-![New summary mobile]
+![New summary mobile](../../../../public/new_summary_mobile_1.png)
+
+![New summary mobile](../../../../public/new_summary_mobile_2.png)
 
 ## Inquiry Sheet
 
