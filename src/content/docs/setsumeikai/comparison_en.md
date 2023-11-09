@@ -101,14 +101,17 @@ Only setsumeikais for the selected school are displayed.
 
 #### New
 
-![New inquiry sheet](../../../../public/new_sheet.png)
+![New inquiry sheet](../../../../public/new_inquiry_sheet.png)
+
+**---------------------------------------------------------------------------------------------------------------**
+**---------------------------------------------------------------------------------------------------------------**
 
 ## Attendance Sheet
 
 #### Old
 
-![Old attendance sheet]
+![Old attendance sheet](../../../../public/old_attendance.png)
 
 #### New
 
-![New attendance sheet]
+![New attendance sheet](../../../../public/new_attendance_sheet.png)
