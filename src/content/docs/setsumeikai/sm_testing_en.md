@@ -11,7 +11,7 @@ Click Manage Setsumeikais.
 
 ![Manage setsumeikais button](../../../../public/manage_setsumeikai.png)
 
-Fill in the form 2-3 times to create some setsumeikais.
+Fill in the form 2-3 times to create some setsumeikais. Add some "Involved Schools" for each setsumeikai. The setsumeikai will appear on the schedules for those schools, and they will have access to manage it.
 
 ![Setsumeikai form](../../../../public/setsumeikai_form.png)
 
@@ -19,7 +19,7 @@ Fill in the form 2-3 times to create some setsumeikais.
 
 In a new tab, go to the main site's <a href="https://kids-up.jp/book-appointment/#/school_list" target="_blank">new inquiry form</a>.
 
-![New inquiry form](../../../../public/inquiry_form.png)
+![New inquiry form](../../../../public/new_school_list.png)
 
 Search for then click on your school, then click on one of the setsumeikais you just added. Fill in the form and submit.
 
@@ -29,18 +29,26 @@ You should receive an email to your school email address soon after submitting, 
 
 Go back to the seasonal registration site tab and refresh the page. You should see the inquiries you just made in the attendance column of the setsumeikai list. Click on the attendance number to go to the attendance list for that setsumeikai.
 
-![Attendance list](../../../../public/attendance_list.png)
+![Attendance list](../../../../public/new_attendance_sheet.png)
 
 You can manually add inquiries/attendees here if you receive them in person or in other ways.
 
 If you click Inquiry List you'll be taken to a list of all inquiries for your school, including 'R' and 'I' type inquiries. 'C' inquiries are still exclusively in the Google Sheets.
 
-![Inquiry list](../../../../public/inquiry_list.png)
+![Inquiry list](../../../../public/new_inquiry_sheet.png)
 
 ## 4. Add the inquiries to Google Sheets
 
 Finally, to import inquiries to the Google Sheets, go to <a href="https://drive.google.com/drive/folders/1q8jnRZbL93Y9PHjRwTNZCYA9jXAnqhUe" target="_blank">this folder</a> and open the sheet corresponding to your school.
 
-Click the green button (①HP 情報取得), and authorize it to access your data. Then click the button once again. You should see the inquiries you created appear on the sheet after some time.
+Click the green button (①HP 情報取得), and authorize it to access your data. Then click the button once again.
+
+![Green button](../../../../public/green_button.png)
+
+You should see the inquiries you created appear on the sheet after some time.
 
 Inquiries will also be automatically imported at around 4pm every day.
+
+## 5. Fill out the survey
+
+Please complete a [2 minute survey](https://forms.gle/LdJwz2FZuEo5Go9M6) to let me know what features you'd like added, or changes you'd like to be made. お疲れ様でした！
