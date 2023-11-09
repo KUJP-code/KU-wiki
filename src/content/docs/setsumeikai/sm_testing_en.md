@@ -9,17 +9,17 @@ Log in to the <a href="https://kids-up.app/" target="_blank">seasonal registrati
 
 Click Manage Setsumeikais.
 
-![Manage setsumeikais button](../../../../public/manage_setsumeikai.png)
+![Manage setsumeikais button](/manage_setsumeikai.avif)
 
 Fill in the form 2-3 times to create some setsumeikais. Add some "Involved Schools" for each setsumeikai. The setsumeikai will appear on the schedules for those schools, and they will have access to manage it.
 
-![Setsumeikai form](../../../../public/setsumeikai_form.png)
+![Setsumeikai form](/setsumeikai_form.avif)
 
 ## 2. Register for a setsumeikai as a customer
 
 In a new tab, go to the main site's <a href="https://kids-up.jp/book-appointment/#/school_list" target="_blank">new inquiry form</a>.
 
-![New inquiry form](../../../../public/new_school_list.png)
+![New inquiry form](/new_school_list.avif)
 
 Search for then click on your school, then click on one of the setsumeikais you just added. Fill in the form and submit.
 
@@ -29,13 +29,13 @@ You should receive an email to your school email address soon after submitting, 
 
 Go back to the seasonal registration site tab and refresh the page. You should see the inquiries you just made in the attendance column of the setsumeikai list. Click on the attendance number to go to the attendance list for that setsumeikai.
 
-![Attendance list](../../../../public/new_attendance_sheet.png)
+![Attendance list](/new_attendance_sheet.avif)
 
 You can manually add inquiries/attendees here if you receive them in person or in other ways.
 
 If you click Inquiry List you'll be taken to a list of all inquiries for your school, including 'R' and 'I' type inquiries. 'C' inquiries are still exclusively in the Google Sheets.
 
-![Inquiry list](../../../../public/new_inquiry_sheet.png)
+![Inquiry list](/new_inquiry_sheet.avif)
 
 ## 4. Add the inquiries to Google Sheets
 
@@ -43,7 +43,7 @@ Finally, to import inquiries to the Google Sheets, go to <a href="https://drive.
 
 Click the green button (①HP 情報取得), and authorize it to access your data. Then click the button once again.
 
-![Green button](../../../../public/green_button.png)
+![Green button](/green_button.avif)
 
 You should see the inquiries you created appear on the sheet after some time.
 
