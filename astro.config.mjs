@@ -22,6 +22,11 @@ export default defineConfig({
           autogenerate: { directory: "guides" },
         },
         {
+          label: "Materials Site",
+          collapsed: true,
+          autogenerate: { directory: "materials" },
+        },
+        {
           label: "Registration Site",
           collapsed: true,
           items: [
