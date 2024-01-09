@@ -1,5 +1,5 @@
 ---
-title: Materials Site Overview
+title: Overview
 ---
 
 My initial plan for the materials site structure.
@@ -15,22 +15,48 @@ My initial plan for the materials site structure.
 
 ## Marketing Site
 
-There are two ways we can go with this, a static site or a CMS type thing. Static site will be cheaper, faster and simpler but a CMS type setup would allow non-technical staff to modify marketing copy etc. more easily. There's also the hybrid approach of having a mostly static site which fetches some info as needed from the customer site where staff could create content.
+I think we should go for a fully static site for this, both for SEO and performance. Having static content also makes it much easier to ensure everything looks good on all devices as you don't have such a wide range of potential content to make work.
 
-### Fully static
+We should use Astro as a framework to generate the site since it's faster to work with than vanilla JS and gives a lot of handy features like letting you use any frontend framework (React, Svelte, Angular etc.) and the ability to go for hybrid/full SSR in the future if we want to for some reason.
 
-My first preference would be a static site if possible, it'll be fast, simple and cheap. We could build it with Astro, same as this wiki but without the Starlight theme so we can make our own. Would also make it easier to add islands of dynamic content with Astro Islands, or transition to full server side rendering since Astro supports that as well. It also lets us use any frontend framework for components, so React, Svelte, Vue etc. are all fine. Opens up the possible contributors/ready made componenets we can use a bit, though I think we still wanna stick with one to keep things simple.
+For hosting we could chuck it on S3, or Cloudflare Pages if we do what I think we should and get the new domain on Cloudflare/transfer the .app domain to Cloudflare. Static sites are free on Cloudflare and nearly free on S3, just have to pay for the storage which is trivial.
 
-We could host it on S3, or on cloudflare pages since we're gonna be using them for our domains in the future anyway. Either way will be significantly cheaper than SSR, on cloudflare it could literally be free and on AWS we'd just need to pay for the S3 storage + bandwidth, maybe $5 a month tops.
-
-I'd be surprised if doing it this way, fully static, took more than a month. It could very possibly take less than that depending on the complexity of the content/styling.
-
-### Hybrid
-
-We could also make the marketing site mostly static, with only some parts like a carousel of our current packages being dynamic. Could achieve this a number of ways. In this scenario non-tech staff could add content on the customer site (or seasonal site since they already have logins) which the marketing site would fetch whenever the relevant page is loaded. This probably slows down the page load by some amount, but we can mitigate that to some degree using a CDN and caching. Both of those add complexity though, which makes this probably the option which takes the longest. I need to make the CMS dashboard from the full SSR option, the static site, the dynamic parts of the static site and the APIs/CDN to glue all the components together. If it works out could be almost as fast as a static site, only a little more expensive and allow non-tech staff to modify the marketing site.
-
-I'm not an expert on CDN pricing but given the pretty tiny volumes of data we work with I'd be surprised if it was more than an extra $5 a month.
-
-### Full SSR
+Sign up form could either send to the customer site API, or we could redirect them to the customer site sign up page.
 
 ## Customer Site
+
+I think this one should be Rails, since it'll need to be dynamically generated/have users/roles etc. We'd host on Elastic Beanstalk just like we do now.
+
+The main choice is whether to make it part of the current seasonal site or its own entirely separate thing on a different server. I'd say separate servers is clearly the better choice, but depends on whether we want to commit ~$20 a month to a new business out of the gate.
+
+Would be possible to start as part of the seasonal site then split into a separate one later if needed or vice versa, but there'd be a not-insignificant amount of friction involved in switching. Gets harder to switch the more changes we make with them separate/together as they'll diverge more and more.
+
+### Part of the seasonal site
+
+##### Pros
+
+- Cheaper, < $5 a month extra compared to our baseline bill
+- Will save some time as I don't have to do the initial AWS/Rails setup
+- Everything in one place for staff who interact with both seasonal & materials sites (though mostly just admins I guess?)
+- Consistent branding (if we want that)
+
+##### Cons
+
+- Will also waste some time making it fit into the current Site
+- Will be more complex, for stuff like security I'll always have to consider an extra set of roles and permissions going forward
+- If one site goes down, so does the other. e.g. the platform upgrade we need to do after spring would also take down the materials site
+- Could be difficult to style, the seasonal site uses Bootstrap which is not ideal for fancy stuff, and replacing it with Tailwind/using both is a lot
+
+### Separate
+
+##### Pros
+
+- Greenfield projects are always nice, we start on the latest version of Ruby/Rails, latest AWS platform, with all my accumulated knowledge and no legacy code
+- If one site goes down it doesn't affect the other
+- Much easier to style as I can ditch Bootstrap and use Tailwind without having to run both at once/rework all the seasonal site's styling
+- Differentiated from the teaching side (if we want that)
+
+##### Cons
+
+- More expensive, likely about as much as the full cost of the seasonal site (~ $20 a month). Only thing we could maybe share is the S3 bucket, not a big cost
+- Initial setup will take some time, but not that much. I'm a lot more familiar with AWS these days, and the initial Rails setup is short/will let me make some better decisions than I did last time
