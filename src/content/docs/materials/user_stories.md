@@ -79,3 +79,9 @@ Same login view as a teacher but they have the option to add teachers/students a
 - Can contact support?
 
 Calendar nav bar at top is used to navigate between materials for a given day, current day selected at login. Can click on a day to see the materials for that day, maybe buttons to skip ahead/back a month.
+
+Top navbar has links to contact us, news/blog.
+
+Main area also has links for today's different lessons, e.g. english class/phonics/exercise. Can download materials.
+
+Teachers should also be able to comment on/input test results for students somewhere, as well as see comments by other teachers (possibly with notifications).
