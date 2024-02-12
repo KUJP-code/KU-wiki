@@ -30,11 +30,17 @@ Builds an image from a Dockerfile at the specified path. Works by building a thr
 
 By default all files in PATH will be added to the image, solve this with a `.dockerignore`, much like a `.gitignore`.
 
-Build steps are cached, so only the steps following the line you made a change on will need to be rebuilt.
+Build steps are cached, so only the steps following the line you made a change on will need to be rebuilt. For this reason you wanna run your update & install commands together with && and packages on separate lines using | so you're not installing cached versions of packages from a previous image.
+
+Along similar lines, you wanna copy your Gemfile/lock and bundle install prior to copying the entire project directory. That way unrelated changes to your project files won't require reinstalling all your gems, the layer will remain cached unless your Gemfile actually changes.
 
 #### Options
 
 `- t` - Lets you specify a tag for the image you're building. Can be supplied multiple times for multiple tags, once for each.
+
+### `docker images`
+
+Lists the available images, can add `prune` to remove old images. There's also `prune` commands for any other resource, and you can prune everything with `docker system prune`.
 
 ### `docker ps` & `docker ls`
 
@@ -82,6 +88,10 @@ Copies files from the host directory given as the first argument to the containe
 
 Sets the base image you're starting from, will download it if not present.
 
+### LABEL
+
+In the form `LABEL <key>=<value>` applies a label 'key' set to 'value', like `LABEL email=bretttanner171@gmail.com`. You can apply as many labels as you like, either in one line with a single LABEL or on multiple lines with multiple LABEL instructions, and any kind of metadata you want can be attached.
+
 ### RUN
 
 Executes a command in the container, automatically executed with sudo.
@@ -91,3 +101,45 @@ Append `- yqq --no-install-recommends` to install the packages you need. `y` aut
 ### WORKDIR
 
 Sets the default directory for commands to be run from in the container. You can use this like `cd` to change directories during Dockerfile execution, and the final directory will be set as the default working directory for the built image.
+
+## Docker Compose
+
+Allows you to coordinate and manage containers for the different services that make up your application. Launch your app with `docker-compose up`, `-d` launches it in detached mode, which launches the app in the background and returns you to the shell.
+
+Images are only built if they don't exist, so remember to rebuild them with `docker-compose build` when you make changes.
+
+The steps taken when running `docker-compose up` are:
+
+1. Create a separate network for the app.
+2. Create any non-locally mounted volumes like PG databases.
+3. Builds an image for any service with a `build` key.
+4. Creates a container from the image for each service.
+5. Starts the containers.
+
+Since Ruby usually buffers output to STDOUT you'll need to add `stdout.sync = true` to the top of `config/boot.rb` to prevent it from buffering.
+
+You can shut compose down with `ctrl+c`, but occasionally that'll fail due to a bug so you might need to use `docker-compose stop`. That command also takes a service name in order to stop just that service.
+
+### docker-compose.yml
+
+A kind of dockerfile for your application, to describe the images your application requires and how they're run together.
+
+Starts with a line specifying the version of Docker Compose you're using, followed by a list of services and the information needed to build them.
+
+The build key sets the path for the dockerfile to build the image from, relative to docker-compose.yml.
+
+There's also a 'ports' key which sets the ports to expose to the host.
+
+The `command` key sets the command to run in the container like CMD in the dockerfile. Will override the default CMD in the dockerfile.
+
+`volumes` lets you mount a volume (at a path given relative to the docker-compose.yml) to the container. You can use a '.' to mount the current directory rather than `${PWD}` like you would with -v when using `docker run`.
+
+### Commands
+
+- `build image_name` to build images, useful since compose will keep track of which Dockerfile belongs to which of your services.
+- `down` undoes everything `up` does, the private network, associated services etc.
+- `exec container_name` to execute a command in a running container.
+- `logs` with `-f` and a service name to `tail -f` the logs for that service.
+- `pause`/`unpause` to pause/unpause containers
+- `restart`, `stop` and `start` to stop and start services.
+- `rm` removes the specified containers
