@@ -54,3 +54,13 @@ No changes, once we switch the URLs defined in the API endpoint sheet the system
 8. GAS then sends a POST request to the Sheets#update API endpoint, which marks the inquiry as sent so it will not be resent.
 
 There is also a Sheets#schools endpoint that returns a list of all school names like the previous one.
+
+## Oddities
+
+### School list order
+
+We were given a requirement to display schools in the same order found [here](https://kids-up.jp/school), which is sorted by Tokyo/Kanagawa/Yokohama then the ku/shi the school is in. Online had to go at the end.
+
+Since our addresses are just a long string not separated into components and I'm not sure how you sort alphabetically in Japanese we had no easy way to sort them, so I just hardcoded an array of school ids in the correct order into the SchoolList component.
+
+If we add new schools you'll need to update this array to reflect the new order of the schools in the main site list; if you don't then the new schools won't be shown in the school list.

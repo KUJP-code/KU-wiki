@@ -175,6 +175,14 @@ The path works just like mounting a file system volume, except the value before 
 
 ## Production Deployments
 
+### AWS-Specific stuff
+
+- Update dockerrun.aws.json with the new image tag
+- Build the new image and push it to dockerhub
+- `eb deploy -l <version>` to deploy
+
+This workflow relies on having the eb cli installed, having it configured to target the correct application/environment and having the `AWS_EB_PROFILE` env variable set.
+
 ### Docker Swarm vs Kubernetes
 
 Basically Kubernetes has more features, but is also more complex to configure and install. Since we're on AWS we'll probably use ECS or EKS, but having notes on Swarm/Kubernetes could still be useful to understand the concepts involved/potential alternatives. Also, using AWS stuff always means implementation details like IAM roles will leak into your orchestration config.
