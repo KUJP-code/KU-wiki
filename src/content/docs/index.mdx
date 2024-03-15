@@ -3,17 +3,9 @@ title: Welcome to the KidsUP Wiki
 description: Wiki for the KidsUP web team.
 template: splash
 hero:
-  tagline: Access docs on our projects through the link cards below.
+  tagline: Access docs for our projects through the link cards below.
   image:
     file: /public/favicon.svg
-  actions:
-    - text: Registration Site
-      link: /registration_overview/
-      icon: right-arrow
-      variant: primary
-    - text: Company Github
-      link: https://github.com/KUJP-code
-      icon: external
 ---
 
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
@@ -22,7 +14,7 @@ import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 <CardGrid stagger>
   <LinkCard title="Guides" href="/guides/1_contributions/" />
-  <LinkCard title="Registration Site" href="/registration_overview/" />
+  <LinkCard title="Event Site" href="event/1_overview/" />
   <LinkCard title="Setsumeikai Calendar" href="/setsumeikai/1_overview/" />
   <LinkCard title="Materials Site" href="/materials/1_overview/" />
 </CardGrid>

@@ -4,11 +4,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-	image: {
-		service: {
-			entrypoint: "astro/assets/services/noop",
-		},
-	},
 	integrations: [
 		starlight({
 			title: "KU-Docs",
@@ -29,33 +24,18 @@ export default defineConfig({
 					autogenerate: { directory: "materials" },
 				},
 				{
-					label: "Registration Site",
+					label: "Event Site",
 					collapsed: true,
 					items: [
 						{
 							label: "Overview",
 							collapsed: true,
-							link: "/registration_overview",
+							link: "/event/1_overview",
 						},
 						{
 							label: "AWS",
 							collapsed: true,
-							autogenerate: { directory: "aws" },
-						},
-						{
-							label: "Controllers",
-							collapsed: true,
-							autogenerate: { directory: "controllers" },
-						},
-						{
-							label: "Models",
-							collapsed: true,
-							autogenerate: { directory: "models" },
-						},
-						{
-							label: "Views",
-							collapsed: true,
-							autogenerate: { directory: "views" },
+							autogenerate: { directory: "/event/aws" },
 						},
 					],
 				},
@@ -63,6 +43,11 @@ export default defineConfig({
 					label: "Setsumeikai Calendar",
 					collapsed: true,
 					autogenerate: { directory: "setsumeikai" },
+				},
+				{
+					label: "Tech Stack",
+					collapsed: true,
+					autogenerate: { directory: "stack" },
 				},
 			],
 		}),

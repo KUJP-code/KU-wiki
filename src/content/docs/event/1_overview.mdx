@@ -1,0 +1,152 @@
+---
+title: Event Site Overview
+description: An overview of the event registration site.
+tableOfContents: false
+editUrl: false
+---
+
+import { Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+
+This site was originally created to replace the previous registration process for seasonal events. It has since grown to encompass many more features and events than originally intended, including setsumeikais, surveys and single day parties like Chocolate Party & Science Day.
+
+This page starts by explaining the previous event registration process and comparing it to the current site for context, then provides a thorough explanation of the site's current features.
+
+<Tabs>
+
+<TabItem label="Customer Features" icon="star">
+
+:::note
+Screenshots for customer features are provided in mobile format, as analytics show this is how most customers interact with the site.
+:::
+
+## Historical Context
+
+Parents registered for activities from a Google Form, which updated a Google Sheet containing all the registrations for a given school.
+
+This was not a great experience for parents, who had to register for each activity from a different page, re-enter their information and their child's for each event, and repeat the entire process for each child.
+
+It was also impossible to edit a booking once made without contacting the school, creating extra work for both parents and school managers.
+
+By contrast the site allows all activities and options to be registered for from a single page by clicking toggles, saves parent & child information between events (and updates children with information from the SS) and allows registrations for one child to be copied to a sibling with the click of a button.
+
+Customers can edit their booking at any time prior to its confirmation by the SM, without any interaction by KU staff.
+
+## Existing Customer Flow
+
+<Steps>
+<ol>
+	<li>
+		1. Sign in
+		<div class="image-container">
+			![Signin page](../../../assets/event/signin.avif)
+		</div>
+	</li>
+	<li>
+		2. Select event, or select child then event
+		<div class="image-container">
+			![Select event from customer profile](../../../assets/event/customer_profile.avif)
+			![Select event from child profile](../../../assets/event/child_profile.avif)
+		</div>
+	</li>
+	<li>
+		3. Select activities and options
+		<div class="image-container">
+			![Event page 1](../../../assets/event/event1.avif)
+			![Event page 2](../../../assets/event/event2.avif)
+			![Event page 3](../../../assets/event/event3.avif)
+		</div>
+	</li>
+	<li>
+		4. Confirm details before making the booking
+		<div class="image-container">
+			![Booking confirm page 1](../../../assets/event/booking_confirm1.avif)
+			![Booking confirm page 2](../../../assets/event/booking_confirm2.avif)
+		</div>
+	</li>
+	<li>
+		5. Complete the booking.
+		<div class="image-container">
+			![Booking complete page 1](../../../assets/event/booking_complete1.avif)
+			![Booking complete page 2](../../../assets/event/booking_complete2.avif)
+		</div>
+	</li>
+	<li>
+		6. Receive confirmation email
+		<div class="image-container">
+			![Email confirmation 1](../../../assets/event/booking_email1.avif)
+			![Email confirmation 2](../../../assets/event/booking_email2.avif)
+		</div>
+	</li>
+</ol>
+
+</Steps>
+
+## New Customer Flow
+
+<Steps>
+<ol>
+	<li>
+		1. Sign up
+		<div class="image-container">
+			![Signup page 1](../../../assets/event/signup1.avif)
+			![Signup page 2](../../../assets/event/signup2.avif)
+		</div>
+	</li>
+	<li>
+		2. Find their child by SSID & birthday
+		<div class="image-container">
+			![Find child step 1](../../../assets/event/find_child1.avif)
+			![Find child step 2](../../../assets/event/find_child2.avif)
+		</div>
+		or add a new child if not in SS/SSID unknown
+		<div class="image-container">
+			![Add new child form 1](../../../assets/event/add_child1.avif)
+			![Add new child form 2](../../../assets/event/add_child2.avif)
+		</div>
+	</li>
+	<li>
+		3. Proceed as if an existing customer from the claimed/added child's profile
+		<div class="image-container">
+			![New child profile](../../../assets/event/child_new.avif)
+		</div>
+	</li>
+</ol>
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Staff Features" icon="document">
+
+## Historical Context
+
+Staff managed registrations for each event using a Google Sheet which took minutes to load and would often become unresponsive, requiring another minutes-long reload.
+
+Email templates were provided, but could only be sent by manually copying the template into a separate email client, and there was no way of verifying student or parent information.
+
+The site replaced the Google Sheet with a simple table on a web page, which commonly loads in less than a second and never more than 2-3 seconds.
+
+Emails are sent automatically on booking creation, confirmation and any changes. Student information is known to be correct as it's provided by the SS, and parents/child details are only a click or two away from the table.
+
+
+## Area Managers & above
+
+## Admins
+
+</TabItem>
+
+<TabItem label="Technical Details" icon="seti:html">
+
+## Feature Overview
+
+## Key Gems
+
+## Hosting
+
+## Misc
+
+Analytics provided by Microsoft Clarity.
+
+</TabItem>
+
+</Tabs>
