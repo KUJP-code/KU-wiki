@@ -6,6 +6,8 @@ editUrl: false
 ---
 
 import { Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import ExistingCustomerFlow from "../../../components/event/ExistingCustomerFlow.astro";
+import NewCustomerFlow from "../../../components/event/NewCustomerFlow.astro";
 
 This site was originally created to replace the previous registration process for seasonal events. It has since grown to encompass many more features and events than originally intended, including setsumeikais, surveys and single day parties like Chocolate Party & Science Day.
 
@@ -31,88 +33,9 @@ By contrast the site allows all activities and options to be registered for from
 
 Customers can edit their booking at any time prior to its confirmation by the SM, without any interaction by KU staff.
 
-## Existing Customer Flow
+<ExistingCustomerFlow />
 
-<Steps>
-<ol>
-	<li>
-		1. Sign in
-		<div class="image-container">
-			![Signin page](../../../assets/event/signin.avif)
-		</div>
-	</li>
-	<li>
-		2. Select event, or select child then event
-		<div class="image-container">
-			![Select event from customer profile](../../../assets/event/customer_profile.avif)
-			![Select event from child profile](../../../assets/event/child_profile.avif)
-		</div>
-	</li>
-	<li>
-		3. Select activities and options
-		<div class="image-container">
-			![Event page 1](../../../assets/event/event1.avif)
-			![Event page 2](../../../assets/event/event2.avif)
-			![Event page 3](../../../assets/event/event3.avif)
-		</div>
-	</li>
-	<li>
-		4. Confirm details before making the booking
-		<div class="image-container">
-			![Booking confirm page 1](../../../assets/event/booking_confirm1.avif)
-			![Booking confirm page 2](../../../assets/event/booking_confirm2.avif)
-		</div>
-	</li>
-	<li>
-		5. Complete the booking.
-		<div class="image-container">
-			![Booking complete page 1](../../../assets/event/booking_complete1.avif)
-			![Booking complete page 2](../../../assets/event/booking_complete2.avif)
-		</div>
-	</li>
-	<li>
-		6. Receive confirmation email
-		<div class="image-container">
-			![Email confirmation 1](../../../assets/event/booking_email1.avif)
-			![Email confirmation 2](../../../assets/event/booking_email2.avif)
-		</div>
-	</li>
-</ol>
-
-</Steps>
-
-## New Customer Flow
-
-<Steps>
-<ol>
-	<li>
-		1. Sign up
-		<div class="image-container">
-			![Signup page 1](../../../assets/event/signup1.avif)
-			![Signup page 2](../../../assets/event/signup2.avif)
-		</div>
-	</li>
-	<li>
-		2. Find their child by SSID & birthday
-		<div class="image-container">
-			![Find child step 1](../../../assets/event/find_child1.avif)
-			![Find child step 2](../../../assets/event/find_child2.avif)
-		</div>
-		or add a new child if not in SS/SSID unknown
-		<div class="image-container">
-			![Add new child form 1](../../../assets/event/add_child1.avif)
-			![Add new child form 2](../../../assets/event/add_child2.avif)
-		</div>
-	</li>
-	<li>
-		3. Proceed as if an existing customer from the claimed/added child's profile
-		<div class="image-container">
-			![New child profile](../../../assets/event/child_new.avif)
-		</div>
-	</li>
-</ol>
-
-</Steps>
+<NewCustomerFlow />
 
 </TabItem>
 
@@ -140,7 +63,75 @@ Emails are sent automatically on booking creation, confirmation and any changes.
 
 ## Feature Overview
 
+### Users
+
+- Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Customer
+  - Each role has different permissions, allowing them to access different features of the site.
+  - Permissions/access controlled by the Pundit gem
+  - Full unit & request test coverage of permissions for all controllers
+  - Ensured by after_action callbacks on controllers which raise an error if authorisation not performed
+- Customers
+  - Can view their children and their bookings
+  - Can make bookings for their children at any ongoing event at any school
+  - Can edit their bookings for ongoing events, and view bookings for past events
+  - Can claim a child based on their SSID & birthday, or add a new child
+  - Can manage their email preferences and personal information
+- Statisticians
+  - Can view event summary statistics for all current events on profile
+  - Can view statistics dashboard for all schools and any individual school
+  - Can view survey results for all schools
+- School Managers
+  - Can view event summary statistics and daily activity attendance for their school on their profile
+  - Has a list of all invoices they deleted and their summary/total cost on their profile
+  - Can edit their school's information
+  - Can create/manage setsumeikais for their school
+  - Can view and manage inquiries for their school
+  - Can view survey responses for their school
+  - Can access statistics dashboard for their school
+  - Can manage all bookings for events at their school
+    - Confirm, with or without automated email
+	- Add manual adjustments
+	- Edit directly, from the same UI as customers
+  - Can access the event sheet for events at their school. For each registered student shows:
+    - Basic student info
+	- Notifications for unusual events like students attending at a school different to their usual one or students missing ids, which link to a page which allows corrective action to be taken
+	- List of student bookings for this event with cost & link to booking
+	- Total cost for this event
+	- A modal to show the booking summary
+	- Various toggles to mark the status of the booking, e.g. seen (reset on change), entered into SS, email sent
+	- Any coupons applied to the student's bookings
+	- A full list of activities the student will attend, with options and a link to the attendance sheet for each activity
+  - Can access attendance sheets for each activity at their school
+    - List names of all students attending, along with their options, photo status, membership status, allergies and kindy/elementary status
+	- Relevant columns have a count of the children they apply to, for example the number of kindy/elementary kids in the attendance column or the number of photo kids in that column
+  - Can access full lists of students and parents associated with their school, as well as their profiles & information
+  - Can access a list of activities for each event at their school, and view their open/closed status
+  - Can access a list of all past events at their school, as well as the associated event/attendance sheets
+- Area Managers
+  - All School Manager capabilities, but for all schools in their managed areas
+  - Additionally, can manually close or open activities
+
+
+### Bookings (model name is Invoice)
+
+- Options
+  - Auto-destroyed if associated slot is de-registered
+  - Photo service applies automatically if a sibling selected it
+
+### Events
+
+- Time Slots
+  - Can be manually opened and closed, preventing further registrations. Also automatically close on a given date.
+
+### Statistics Dashboard
+
 ## Key Gems
+
+### Devise
+
+### Prawn
+
+### Pundit
 
 ## Hosting
 

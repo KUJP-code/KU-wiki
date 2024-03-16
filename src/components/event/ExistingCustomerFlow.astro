@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import { Steps } from "@astrojs/starlight/components";
+---
+
+<h2>Existing Customer Flow</h2>
+
+<Steps>
+<ol>
+	<li>
+		1. Sign in
+		<div class="flex gap-3">
+			<Image src="/src/assets/event/signin.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Signin page" />
+		</div>
+	</li>
+	<li>
+		2. Select event, or select child then event
+		<div class="flex gap-3">
+			<Image src="/src/assets/event/customer_profile.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select event page" />
+			<Image src="/src/assets/event/child_profile.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select event page from child profile" />
+		</div>
+	</li>
+	<li>
+		3. Select activities and options
+		<div class="flex gap-3">
+			<Image src="/src/assets/event/event1.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+			<Image src="/src/assets/event/event2.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+			<Image src="/src/assets/event/event3.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+		</div>
+	</li>
+	<li>
+		4. Confirm details before making the booking
+		<div class="flex gap-3">
+			<Image src="/src/assets/event/booking_confirm1.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+			<Image src="/src/assets/event/booking_confirm2.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+		</div>
+	</li>
+	<li>
+		5. Complete the booking.
+		<div class="flex gap-3">
+			<Image src="/src/assets/event/booking_complete1.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+			<Image src="/src/assets/event/booking_complete2.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+		</div>
+	</li>
+	<li>
+		6. Receive confirmation email
+		<div class="flex gap-3">
+			<Image src="/src/assets/event/booking_email1.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+			<Image src="/src/assets/event/booking_email2.avif" class="w-full basis-1/3 !m-0" width={200} height={400} alt="Select activities" />
+		</div>
+	</li>
+</ol>
+
+</Steps>
