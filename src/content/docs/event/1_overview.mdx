@@ -64,41 +64,42 @@ Emails are sent automatically on booking creation, confirmation and any changes.
 ## Feature Overview
 
 ### Users
+Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Customer.
+- Each role has different permissions, allowing them to access different features of the site.
+- Permissions/access controlled by the Pundit gem
+- Full unit & request test coverage of permissions for all controllers
+- Ensured by after_action callbacks on controllers which raise an error if authorisation not performed
+- Authenticated by username and an encrypted password, password can be reset using their email
 
-- Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Customer
-  - Each role has different permissions, allowing them to access different features of the site.
-  - Permissions/access controlled by the Pundit gem
-  - Full unit & request test coverage of permissions for all controllers
-  - Ensured by after_action callbacks on controllers which raise an error if authorisation not performed
-- Customers
-  - Can view their children and their bookings
-  - Can make bookings for their children at any ongoing event at any school
-  - Can edit their bookings for ongoing events, and view bookings for past events
-  - Can claim a child based on their SSID & birthday, or add a new child
-  - Can manage their email preferences and personal information
-- Statisticians
-  - Can view event summary statistics for all current events on profile
-  - Can view statistics dashboard for all schools and any individual school
-  - Can view survey results for all schools
-- School Managers
-  - Booking Management
-    - Can merge multiple bookings into one so their total cost can be calculated together and a single summary can be generated
-  - Child/Customer Management
-  - Event Management
+#### Customers
+- Can view their children and their bookings
+- Can make bookings for their children at any ongoing event at any school
+- Can copy all bookings to a sibling with the click of a button
+- Can edit their bookings for ongoing events, and view bookings for past events
+- Can claim a child based on their SSID & birthday, or add a new child
+- Can manage their email preferences and personal information
 
-  - Can view event summary statistics and daily activity attendance for their school on their profile
-  - Has a list of all invoices they deleted and their summary/total cost on their profile
-  - Can edit their school's information
-  - Can create/manage setsumeikais for their school
-  - Can view and manage inquiries for their school
-  - Can view survey responses for their school
-  - Can access statistics dashboard for their school
+#### Statisticians
+- Can view event summary statistics for all current events on profile
+- Can view statistics dashboard for all schools and any individual school
+- Can view survey results for all schools
+
+#### School Managers
+- Booking Management
   - Can manage all bookings for events at their school
-    - Confirm, with or without automated email
-	- Add manual adjustments
-	- Edit directly, from the same UI as customers
+  - Confirm, with or without automated email
+  - Add manual adjustments
+  - Edit directly, from the same UI as customers
+  - Delete unconfirmed bookings
+  - Can view event summary statistics and daily activity attendance for their school on their profile
+  - Have a list of the 5 most recent bookings at their school at the top of their profile
+  - Has a list of all bookings they deleted and their summary/total cost on their profile
+  - Merge multiple bookings for the same child into a single booking so their cost is calculated together
+
+- Event Management
+  - Can access statistics dashboard for their school
   - Can access the event sheet for events at their school. For each registered student shows:
-    - Basic student info
+	- Basic student info
 	- Notifications for unusual events like students attending at a school different to their usual one or students missing ids, which link to a page which allows corrective action to be taken
 	- List of student bookings for this event with cost & link to booking
 	- Total cost for this event
@@ -109,26 +110,107 @@ Emails are sent automatically on booking creation, confirmation and any changes.
   - Can access attendance sheets for each activity at their school
     - List names of all students attending, along with their options, photo status, membership status, allergies and kindy/elementary status
 	- Relevant columns have a count of the children they apply to, for example the number of kindy/elementary kids in the attendance column or the number of photo kids in that column
-  - Can access full lists of students and parents associated with their school, as well as their profiles & information
   - Can access a list of activities for each event at their school, and view their open/closed status
   - Can access a list of all past events at their school, as well as the associated event/attendance sheets
-- Area Managers
+
+- School Management
+  - Can edit their school's information
+  - Can create/manage setsumeikais for their school
+  - Can view and manage inquiries for their school
+  - Can view survey responses for their school
+  - Can access full lists of students and parents associated with their school, as well as their profiles & information
+    - The SM can access parent/child personal information after entering their PIN
+  - Can merge children created by parents into their counterparts imported from the SS, preserving all existing bookings and updating their information to match the SS
+
+#### Area Managers
   - All School Manager capabilities, but for all schools in their managed areas
   - Additionally, can manually close or open activities
+  - View event summary statistics for all schools in their managed areas
+  - View the school manager profiles for any SM in their area, and all the information found there
 
+#### Admins
+  - All capabilities of any other role, but for every school/area
+  - Overall summary statistics for each active event on their profile
+  - Can create new Events
+    - At a single school or all schools
+    - And time slots
+	- Can edit the automatically created options for any time slot
+	- Can edit single events/time slots
+	- Can add an afternoon slot to a given special day at every school from one form
+  - Can upload images to be used for events, time slots or new schools
+  - Can download certain database tables in CSV format so Leroy can process them for statistics
+  - Can quickly import new children, or more slowly update existing children from CSV (used to import SS data)
+  - Can create new price lists and assign existing ones to be used for events
+    - Can also see at a glance which price lists are used by which events
+  - Can create new schools
+  - Can create new surveys
+    - Surveys can have any number of questions
+	- Questions can be represented as any of the common input types (text, checkbox, select, radio etc)
+	- Filters can be set to determine which children are shown the survey
+	- Any column on the children table is available as a filter
+  - Can view the full statistics dashboard for all schools and areas
 
 ### Bookings (model name is Invoice)
 
-- Options
+- Have an automatically generated summary which gives a list of all activity/option registrations and adjustments together with some basic info about the child
+- Have a full version history which can be seen on the booking page, with the summary of the booking at that time, user who made the change and timestamp
+- Have adjustments
+  - Some are automatically applied based on certain criteria, like the hat adjustment for outdoor activities if the registered child doesn't have a KidsUP hat
+  - Can also be manually applied by staff
+  - Validations prevent them reducing the total cost of the booking below 0
+- Activity registrations
+  - Displayed in a list with the activity name, whether it's morning or afternoon and any options selected for that activity
+  - Cost for all activities is broken down in the summary section, with the number/type of courses used and their prices shown
+- Option registrations
+  - Listed alongside the time slot they apply to in the activity list
+  - Grouped by name and summarized with total cost for that option name in the summary section
   - Auto-destroyed if associated slot is de-registered
-  - Photo service applies automatically if a sibling selected it
+  - Photo service applies automatically if a sibling registered for it
+- Emails with an attached summary and autogenerated PDF breakdown of the costs are automatically sent on every change to the booking
+  - Confirmation emails can be automatically sent when the booking is confirmed or copied from a template at the discretion of the SM
 
 ### Events
 
+- Have their own options which apply event-wide
+  - Currently only photo service is ever added, but multiple such options can be added
+  - Uses the same Option model as activity options through a polymorphic association
+- All activities and options can be registered for from a single page
+- A live calculation of the cost for the active child is shown at the bottom of the screen
+- Further details about the registered activities and any extra costs can be found in a collapsible summary on that bottom bar
+- There is also a live calculation of the total cost for that family for the current event at the top of the page
 - Time Slots
-  - Can be manually opened and closed, preventing further registrations. Also automatically close on a given date.
+  - Can be manually opened and closed, preventing further registrations
+  - Also automatically close on a given date
+  - Can be one of a few categories (seasonal, special, outdoor and party) which have different behaviours/costs
+  - Have start and end times, as well as a boolean representing whether they're a morning or afternoon slot
+  - Automatically track their registration count using counter_cache
+  - Have cost modifiers for internal/external/kindy/elementary students
+  - Have a snack boolean which affects their price in front and backend calculations
+  - For any category other than special, the afternoon slot is automatically created from the morning slot's information, with default options
+
+### Setsumeikais/Inquiries
+
+- School and area managers can create setsumeikais at their managed schools
+  - Existing setsumeikais can be edited, and copied for faster creation of similar setsumeikais
+- Created with a scheduled start date/time, attendance limit, venue school, involved schools, release date and close date
+- Are then provided to the React-based registration flow I created through an API
+  - The current list of schools and their information/images is also provided through this API
+  - A second, simpler API serves just the school names and IDs to the general inquiry form
+- When customers complete the registration flow (or the separate general inquiry form I also created) their inquiry is sent to another API on the event site and stored in its database
+- Staff can view setsumeikai or general inquries related to their managed schools from the event site
+  - Setsumeikais and inquiries are paginated by school, then groups of 20
+  - a navbar is provided to switch between setsumeikais/inquiries for different schools, for those staff members with permission to view multiple schools
+- The inquiries are also provided to the legacy GAS sheets through an authenticated API to prevent 3rd parties obtaining customer personal information
+  - After inquiries are sent to the GAS sheet, they're marked as sent to avoid duplication of inquiries
 
 ### Statistics Dashboard
+
+- Divded into separate pages for Activities, Bookings, Children, Coupons, Edits, Options and Setsumeikais
+- The secondary nav also allows filtering by event and school
+- For setsumeikais, it's possible to filter by area and school instead
+- Each page has multiple charts showing various statistics related to that category, some of which I added on my own initiative and others requested by Jack/Leroy
+- This is a pretty large part of the site but no screenshots or details because it's sensitive business information
+  - If you're an internal manager ask me and I can show it to you
 
 ## Key Gems
 
