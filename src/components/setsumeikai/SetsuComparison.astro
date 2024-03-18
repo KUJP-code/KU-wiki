@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+	current: string[];
+	heading: boolean;
+	mobile: boolean;
+	old: string[];
+}
+const { current, heading = true, mobile = false, old } = Astro.props;
+---
+
+{heading && <h3>{mobile ? "Mobile" : "Desktop"}</h3>}
+
+<div class={mobile ? "flex flex-wrap justify-around gap-3" : "flex flex-col gap-3"}>
+	<div class="basis-2/5 flex flex-col gap-3">
+		<h4 class="w-full">Old</h4>
+		{old.map((image) =>
+			<Image src={image}
+				   class="!m-0 w-full"
+				   width={200}
+				   height={400}
+				   alt="Old design" />
+			)
+		}
+	</div>
+
+	<div class="basis-2/5 flex flex-col gap-3 !mt-0">
+		<h4 class="w-full">New</h4>
+		{current.map((image) =>
+			<Image src={image}
+				   class="!m-0 w-full"
+				   width={200}
+				   height={400}
+				   alt="New design" />
+			)
+		}
+	</div>
+</div>
+
+

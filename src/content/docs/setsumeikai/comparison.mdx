@@ -1,0 +1,80 @@
+---
+title: Comparison
+description: Comparison to old calendar/sheets
+---
+
+import SetsuComparison from "/src/components/setsumeikai/SetsuComparison.astro";
+
+## Setsumeikai Calendar
+
+On the new page, the school list comes before the calendar and a school must be chosen to view setsumeikais.
+
+Only setsumeikais for the selected school are displayed.
+
+### School List
+
+<SetsuComparison current={["/setsumeikai/new_school_list_mobile.avif"]}
+				 old={["/setsumeikai/old_school_list_mobile.avif"]}
+				 mobile={true} />
+
+<SetsuComparison current={["/setsumeikai/new_school_list.avif"]}
+				 old={["/setsumeikai/old_school_list.avif"]} />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+### Calendar
+
+<SetsuComparison current={["/setsumeikai/new_calendar_mobile.avif"]}
+				 old={["/setsumeikai/old_calendar_mobile.avif"]}
+				 mobile={true} />
+
+<SetsuComparison current={["/setsumeikai/new_calendar.avif"]}
+				 old={["/setsumeikai/old_calendar.avif"]} />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+### Form
+
+<SetsuComparison current={["/setsumeikai/new_form_mobile_1.avif",
+						 "/setsumeikai/new_form_mobile_2.avif",
+						 "/setsumeikai/new_form_mobile_3.avif"]}
+				 old={["/setsumeikai/old_form_mobile_1.avif",
+						"/setsumeikai/old_form_mobile_2.avif",
+						"/setsumeikai/old_form_mobile_3.avif"]}
+				 mobile={true} />
+
+<SetsuComparison current={["/setsumeikai/new_form.avif"]}
+				 old={["/setsumeikai/old_form_1.avif", "/setsumeikai/old_form_2.avif"]} />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+
+### Summary
+
+<SetsuComparison current={["/setsumeikai/new_summary_mobile_1.avif",
+						 "/setsumeikai/new_summary_mobile_2.avif"]}
+				 old={["/setsumeikai/old_summary_mobile_1.avif",
+						"/setsumeikai/old_summary_mobile_2.avif"]}
+				 mobile={true} />
+
+<SetsuComparison current={["/setsumeikai/new_summary.avif"]}
+				 old={["/setsumeikai/old_summary_1.avif", "/setsumeikai/old_summary_2.avif"]} />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+## Inquiry Sheet
+
+<SetsuComparison current={["/setsumeikai/new_inquiry_sheet.avif"]}
+				 old={["/setsumeikai/old_sheet.avif"]} />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+## Attendance Sheet
+
+<SetsuComparison current={["/setsumeikai/new_attendance_sheet.avif"]}
+				 old={["/setsumeikai/old_attendance.avif"]} />
