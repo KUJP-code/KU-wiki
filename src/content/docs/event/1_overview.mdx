@@ -1,11 +1,11 @@
 ---
 title: Event Site Overview
 description: An overview of the event registration site.
-tableOfContents: false
 editUrl: false
 ---
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Image } from "astro:assets";
 import ExistingCustomerFlow from "/src/components/event/ExistingCustomerFlow.astro";
 import NewCustomerFlow from "/src/components/event/NewCustomerFlow.astro";
 
@@ -13,15 +13,9 @@ This site was originally created to replace the previous registration process fo
 
 This page starts by explaining the previous event registration process and comparing it to the current site for context, then provides a thorough explanation of the site's current features.
 
-<Tabs>
+## Customers
 
-<TabItem label="Customer Features" icon="star">
-
-:::note
-Screenshots for customer features are provided in mobile format, as analytics show this is how most customers interact with the site.
-:::
-
-## Historical Context
+### Historical Context
 
 Parents registered for activities from a Google Form, which updated a Google Sheet containing all the registrations for a given school.
 
@@ -33,15 +27,24 @@ By contrast the site allows all activities and options to be registered for from
 
 Customers can edit their booking at any time prior to its confirmation by the SM, without any interaction by KU staff.
 
+:::note
+Screenshots for customer features are provided in mobile format, as analytics show this is how most customers interact with the site.
+:::
+
+### Existing Customers
+
 <ExistingCustomerFlow />
+
+### New Customers
 
 <NewCustomerFlow />
 
-</TabItem>
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
-<TabItem label="Staff Features" icon="document">
+## School Managers & above
 
-## Historical Context
+### Historical Context
 
 Staff managed registrations for each event using a Google Sheet which took minutes to load and would often become unresponsive, requiring another minutes-long reload.
 
@@ -51,17 +54,79 @@ The site replaced the Google Sheet with a simple table on a web page, which comm
 
 Emails are sent automatically on booking creation, confirmation and any changes. Student information is known to be correct as it's provided by the SS, and parents/child details are only a click or two away from the table.
 
-## School Managers & above
+### Event Sheet
+
+<Image src="/event/event_sheet.avif" alt="Event Sheet" width="1200" height="800" />
+
+### Attendance Sheet
+
+<Image src="/event/attendance_sheet.avif" alt="Attendance Sheet" width="1200" height="800" />
+
+### SM Profile
+
+<Image src="/event/sm_profile.avif" alt="SM Profile" width="1200" height="800" />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Area Managers & above
 
+### Activity Management
+
+<Image src="/event/activity_management.avif" alt="Activity Management" width="1200" height="800" />
+
+### Inquiry Management
+
+<Image src="/setsumeikai/new_inquiry_sheet.avif" alt="Inquiry Management" width="1200" height="800" />
+
+### Setsumeikai Management
+
+<Image src="/setsumeikai/new_setsu_management.avif" alt="Setsumeikai Management" width="1200" height="800" />
+
+### Survey Management
+
+<Image src="/event/survey_management.avif" alt="Survey Management" width="1200" height="800" />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
 ## Admins
 
-</TabItem>
+### Activity Management
 
-<TabItem label="Technical Details" icon="seti:html">
+<Image src="/event/activity_management.avif" alt="Activity Management" width="1200" height="800" />
 
-## Feature Overview
+### Asset Upload/Download
+
+<Image src="/event/assets.avif" alt="Asset Management" width="1200" height="800" />
+
+### Event Creation
+
+<Image src="/event/event_creation.avif" alt="Event Creation" width="1200" height="800" />
+
+### Price List Management
+
+<Image src="/event/price_lists.avif" alt="Price List Management" width="1200" height="800" />
+
+### School Management
+
+<Image src="/event/school_management.avif" alt="School Management" width="1200" height="800" />
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+## Tech Stack
+
+The site is a Ruby on Rails app running on AWS. Rails handles both the back and frontend, with templating originally done in ERB and slowly transitioning to HAML. Client side interactivity is handled by a mix of Bootstrap components and Stimulus.js, with Bootstrap and some custom CSS used for styling.
+
+Hosting is handled by AWS Elastic Beanstalk on the Ruby platform, while the domain is managed by Onamae (hopefully transitioning to Cloudflare in August) while Route 53 is the authoritative nameserver. The database is an RDS postgres instance, email is handled by SES and object storage by S3.
+
+Analytics provided by Microsoft Clarity.
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+## Full Feature Overview
 
 ### Users
 Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Customer.
@@ -211,21 +276,3 @@ Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Custo
 - Each page has multiple charts showing various statistics related to that category, some of which I added on my own initiative and others requested by Jack/Leroy
 - This is a pretty large part of the site but no screenshots or details because it's sensitive business information
   - If you're an internal manager ask me and I can show it to you
-
-## Key Gems
-
-### Devise
-
-### Prawn
-
-### Pundit
-
-## Hosting
-
-## Misc
-
-Analytics provided by Microsoft Clarity.
-
-</TabItem>
-
-</Tabs>
