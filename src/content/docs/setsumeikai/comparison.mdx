@@ -3,39 +3,50 @@ title: Comparison
 description: Comparison to old calendar/sheets
 ---
 
+import { Image } from "astro:assets";
 import SetsuComparison from "/src/components/setsumeikai/SetsuComparison.astro";
 
-## Setsumeikai Calendar
+This page provides a comparison of the old and new Setsumeikai registration flows.
 
-On the new page, the school list comes before the calendar and a school must be chosen to view setsumeikais.
+The old flow was embedded on the page within an iframe, sourced from a server no-one had access to and was thus unable to be styled or otherwise modified. I replaced it with a React App using React Router to maintain state between steps in the URL, styled according to designs provided by the Art team and feedback from management.
 
-Only setsumeikais for the selected school are displayed.
-
-### School List
+## School List
 
 <SetsuComparison current={["/setsumeikai/new_school_list_mobile.avif"]}
 				 old={["/setsumeikai/old_school_list_mobile.avif"]}
 				 mobile={true} />
 
+While some ability to filter the results existed in the old flow, it was difficult to see and limited. In the new flow there is a prominently displayed search box and one-click filters for each prefecture.
+
 <SetsuComparison current={["/setsumeikai/new_school_list.avif"]}
 				 old={["/setsumeikai/old_school_list.avif"]} />
+
+The previous flow didn't use a large portion of the screen on desktop, and lacked information about the schools.
+
+Because all the available setsumeikai were listed together on a single page, it was difficult to find the one you were interested in. The new flow improves this by requiring a school to be selected before displaying only setsumeikai for that school.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
-### Calendar
+## Calendar
 
 <SetsuComparison current={["/setsumeikai/new_calendar_mobile.avif"]}
 				 old={["/setsumeikai/old_calendar_mobile.avif"]}
 				 mobile={true} />
 
+The old calendar was just the desktop version crammed into a mobile screen, making the days very difficult to click accurately. It was also necessary to click on a day to know which setsumeikais were available for that day.
+
+The current calendar makes all setsumeikais for the month visible at a glance and provides full-width, easily clickable links for each of them.
+
 <SetsuComparison current={["/setsumeikai/new_calendar.avif"]}
 				 old={["/setsumeikai/old_calendar.avif"]} />
+
+As with the mobile view, much more information is available to parents at a glance, without needing to click on a day. We are also able to easily display filled setsumeikai, giving the impression that they're in demand.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
-### Form
+## Form
 
 <SetsuComparison current={["/setsumeikai/new_form_mobile_1.avif",
 						 "/setsumeikai/new_form_mobile_2.avif",
@@ -45,14 +56,18 @@ Only setsumeikais for the selected school are displayed.
 						"/setsumeikai/old_form_mobile_3.avif"]}
 				 mobile={true} />
 
-<SetsuComparison current={["/setsumeikai/new_form.avif"]}
+We added a requirement to accept the privacy policy prior to submitting an inquiry, messages to the parent depending on the time registered for and modernised the styling considerably.
+
+<SetsuComparison current={["/setsumeikai/new_form_1.avif", "/setsumeikai/new_form_2.avif"]}
 				 old={["/setsumeikai/old_form_1.avif", "/setsumeikai/old_form_2.avif"]} />
+
+As with the school list, we made better use of the available horizontal space now that the form is not constrained by an iframe.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 
-### Summary
+## Summary
 
 <SetsuComparison current={["/setsumeikai/new_summary_mobile_1.avif",
 						 "/setsumeikai/new_summary_mobile_2.avif"]}
@@ -63,6 +78,17 @@ Only setsumeikais for the selected school are displayed.
 <SetsuComparison current={["/setsumeikai/new_summary.avif"]}
 				 old={["/setsumeikai/old_summary_1.avif", "/setsumeikai/old_summary_2.avif"]} />
 
+The registration confirmation screen now utlizes the full width of the screen, making it more compact and easier to read. I also added code to trigger our Google Analytics on submission here, rather than redirects to the former inquiry 'thank you' page.
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
+<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
+
+## Setsumeikai Management
+
+<Image src="/setsumeikai/new_setsu_management.avif" alt="Setsumeikai management" width={1200} height={800} />
+
+School and area managers can now create, edit and see attendance for setsumeikais at their schools from with the Event site, reducing the number of logins/bookmarks needed.
+
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
@@ -71,6 +97,8 @@ Only setsumeikais for the selected school are displayed.
 <SetsuComparison current={["/setsumeikai/new_inquiry_sheet.avif"]}
 				 old={["/setsumeikai/old_sheet.avif"]} />
 
+This page within the event site replicates the functionality of the corresponding Google Sheet, without the need to manually update the inquiry list. On this page inquiries will always be up to date when the page is loaded.
+
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
@@ -78,3 +106,5 @@ Only setsumeikais for the selected school are displayed.
 
 <SetsuComparison current={["/setsumeikai/new_attendance_sheet.avif"]}
 				 old={["/setsumeikai/old_attendance.avif"]} />
+
+Clicking on a setsumeikai name/time from the previous page takes you to this page, which shows the details of parents/children attending that setsumeikai.
