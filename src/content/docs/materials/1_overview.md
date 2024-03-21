@@ -88,6 +88,8 @@ It requires you to be authenticated with the eb cli and docker, as well as for t
 
 The entire customer-facing section of the site is localised to both Japanese & English, with the internal section being primarily English but localised as necessary. The active locale can be toggled with a link in the main nav.
 
+Full unit test coverage of authorisation for all controllers, a system spec for creating each resource and unit/request/system specs as necessary to verify the functionality of non-standard features/prevent regressions.
+
 ### Users
 
 All roles are derived from a single 'users' table in the DB using Rails' built-in single table inheritance mechanisms. Each role has a dynamically generated main nav bar with links specific to the permissions of their role, which highlights the link most closely related to the current page.

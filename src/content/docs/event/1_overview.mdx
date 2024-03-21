@@ -202,7 +202,7 @@ Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Custo
   - Can create new Events
     - At a single school or all schools
     - And time slots
-	- Can edit the automatically created options for any time slot
+	- Can edit or remove the automatically created options for any time slot
 	- Can edit single events/time slots
 	- Can add an afternoon slot to a given special day at every school from one form
   - Can upload images to be used for events, time slots or new schools
@@ -244,6 +244,8 @@ Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Custo
   - Uses the same Option model as activity options through a polymorphic association
 - All activities and options can be registered for from a single page
 - A live calculation of the cost for the active child is shown at the bottom of the screen
+  - This live calculation is also responsible for adding/removing hidden fields from the form submitted to confirm the booking details
+  - There's a set of 3 stimulus controllers which pass messages to each other to handle each registration/unregistration
 - Further details about the registered activities and any extra costs can be found in a collapsible summary on that bottom bar
 - There is also a live calculation of the total cost for that family for the current event at the top of the page
 - Time Slots
@@ -255,6 +257,10 @@ Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Custo
   - Have cost modifiers for internal/external/kindy/elementary students
   - Have a snack boolean which affects their price in front and backend calculations
   - For any category other than special, the afternoon slot is automatically created from the morning slot's information, with default options
+- Time slot options
+  - Options have a polymorphic association to either an event or TimeSlot
+  - Options have a category, which affects how it's displayed on the registration screen, attendance sheets and what validations are applied to it
+  - Some categories have a modifier, like arrival and departure options, which represents how long before or after the activity the student can arrive/leave
 
 ### Setsumeikais/Inquiries
 
