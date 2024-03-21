@@ -119,7 +119,7 @@ Emails are sent automatically on booking creation, confirmation and any changes.
 
 The site is a Ruby on Rails app running on AWS. Rails handles both the back and frontend, with templating originally done in ERB and slowly transitioning to HAML. Client side interactivity is handled by a mix of Bootstrap components and Stimulus.js, with Bootstrap and some custom CSS used for styling.
 
-Hosting is handled by AWS Elastic Beanstalk on the Ruby platform, while the domain is managed by Onamae (hopefully transitioning to Cloudflare in August) while Route 53 is the authoritative nameserver. The database is an RDS postgres instance, email is handled by SES and object storage by S3.
+Hosting is handled by AWS Elastic Beanstalk on the Ruby platform, the domain is managed by Onamae (hopefully transitioning to Cloudflare in August) and Route 53 is the authoritative nameserver. The database is an RDS postgres instance, email is handled by SES and object storage by S3.
 
 Analytics provided by Microsoft Clarity.
 
@@ -131,6 +131,7 @@ Analytics provided by Microsoft Clarity.
 ### Users
 Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Customer.
 - Each role has different permissions, allowing them to access different features of the site.
+  - They also have a main navigation bar with links specific to their role
 - Permissions/access controlled by the Pundit gem
 - Full unit & request test coverage of permissions for all controllers
 - Ensured by after_action callbacks on controllers which raise an error if authorisation not performed
@@ -184,6 +185,8 @@ Have one of 5 roles; Admin, Area Manager, School Manager, Statistician and Custo
   - Can view and manage inquiries for their school
   - Can view survey responses for their school
   - Can access full lists of students and parents associated with their school, as well as their profiles & information
+    - The indexes of children and parents can be filtered by name, english name, email, katakana name and SSID as applicable
+	- The search feature supports partial matching
     - The SM can access parent/child personal information after entering their PIN
   - Can merge children created by parents into their counterparts imported from the SS, preserving all existing bookings and updating their information to match the SS
 
