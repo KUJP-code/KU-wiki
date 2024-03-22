@@ -4,6 +4,10 @@ description: A list of miscellaneous oddities I felt needed to be documented
 editUrl: false
 ---
 
+## Charts disappearing
+
+If your charts generated with @stimulus-components/chartjs suddenly start disappearing, check application.js in the 'javascript/controllers' folder to make sure it's still being registered and hasn't been removed/overriden by `rails g stimulus <controllername>`.
+
 ## Separate schedules for each school
 
 Jayson raised the possiblility of schools within an organisation needing their own offset to the organisation schedule.
