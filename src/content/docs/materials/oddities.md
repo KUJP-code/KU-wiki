@@ -17,3 +17,9 @@ As the lessons for a given day are currently calculated based on the start date 
 My judgement call is that this is reasonably unlikely, and if it turns out to be it'll be easy enough to add, so not adding it now.
 
 If we end up needing to, right now I'm thinking a week_offset integer field (and day_offset if necessary) on the school, then taking it into account in a teacher's day_lessons method.
+
+## Student ID uniqueness
+
+Ideally we'd have globally unique student IDs, but since we're working with a bunch of different schools with different existing ID systems we want to let them use that's not feasible. As a compromise, student IDs are validated to be unique within that student's school.
+
+On a related note, if a student ID isn't provided/they don't have a student ID system, we'll generate one for them based on the student's DB id, school id and a string of random characters.
