@@ -32,18 +32,15 @@ editUrl: false
 
 ## Organisation Admins
 
-
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Curriculum Team
 
-
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Sales
-
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 <hr class="h-1 bg-[#f4bb8c] rounded-xl" />
@@ -74,7 +71,9 @@ It requires you to be authenticated with the eb cli and docker, as well as for t
 3. Fetches the current deployed version and asks you to input the new version
 4. Offers a prompt comparing that with the version you're planning to deploy and requires confirmation to continue
 5. Builds a docker image with the current state of your directory (including uncommitted files)
-  - It's tagged with the version you provided
+
+- It's tagged with the version you provided
+
 6. Pushes that image to docker hub
 7. Updates 'dockerrun.aws.json' with the new image/tag
 8. Commits any outstanding changes with 'Deploy #{version}' as the commit message
@@ -102,11 +101,14 @@ I defined a convenience method `#is?` on the User model to replace the `#admin?/
 
 #### Parents
 
+- Can search for and claim their children by student ID, level and school
 - Can access their children's profiles
   - Can view their children's test results, summarized or for individual tests with a radar graph based on the 4 skills
   - Can edit their child's details
 - Can access any homework materials assigned to their children
 - Can receive messages from teachers
+- Can sign in using multiple different emails
+  - Users can add new emails, but only staff can remove them
 
 #### Teachers
 
@@ -129,6 +131,7 @@ I defined a convenience method `#is?` on the User model to replace the `#admin?/
   - Assign teachers to classes
   - Assign students to classes
   - Create new students at their school
+  - Add parents to students without them
 
 #### Organisation Admins
 
@@ -191,7 +194,7 @@ Lessons can belong to many courses, and the join table allows the week and day i
 ### Students
 
 - Have names, student ids and levels. Associated with many classes, tests, test results and teachers, and belong to a school.
-- Names are automatically redacted to '****' for any user outside their organisation, and encrypted in the database
+- Names are automatically redacted to '\*\*\*\*' for any user outside their organisation, and encrypted in the database
 - Their profile gives an overview of their personal details, classes and teachers, while displaying a summary of their test results
   - The test dates in the summary table can be clicked to switch the radar graph on the other half of the page to show only results for that test
   - As well as revelaing a more detailed table of results for that test
