@@ -29,8 +29,19 @@ export default defineConfig({
 					items: [
 						{
 							label: "Overview",
-							collapsed: true,
 							link: "/event/1_overview",
+						},
+						{
+							label: "API",
+							link: "/event/apis",
+						},
+						{
+							label: "Generating Views",
+							link: "/event/generating_views",
+						},
+						{
+							label: "PDF",
+							link: "/event/pdf",
 						},
 						{
 							label: "AWS",

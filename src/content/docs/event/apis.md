@@ -43,11 +43,11 @@ Needs to return these values for each event at each school which is ongoing or c
 {
     "Summer School 2023": [
         {
-            "school_id": 2
+            "school_id": 2,
             "member_count": 10,
             "member_revenue": 100,
             "external_count": 5,
-            "external_revenue": 50
+            "external_revenue": 50,
             "total_revenue": 150,
             "goal": 200
         },
@@ -55,7 +55,7 @@ Needs to return these values for each event at each school which is ongoing or c
     ],
     "Science Party 2024": [
         {
-            "school_id": 2
+            "school_id": 2,
             "revenue": 200,
             "goal": 300
         },
