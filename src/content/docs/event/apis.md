@@ -61,4 +61,5 @@ Needs to return these values for each event at each school which is ongoing or c
         },
         ...
     ]
+}
 ```
