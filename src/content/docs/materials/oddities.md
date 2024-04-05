@@ -23,3 +23,11 @@ If we end up needing to, right now I'm thinking a week_offset integer field (and
 Ideally we'd have globally unique student IDs, but since we're working with a bunch of different schools with different existing ID systems we want to let them use that's not feasible. As a compromise, student IDs are validated to be unique within that student's school.
 
 On a related note, if a student ID isn't provided/they don't have a student ID system, we'll generate one for them based on the student's DB id, school id and a string of random characters.
+
+## Themes
+
+Themes can be set in `tailwind.config.js` by adding them as decribed by the [plugin docs](https://github.com/crswll/tailwindcss-theme-swapper) and naming them like 'org\_<org_id>'.
+
+You also need to add them to the `org_theme` helper by including the id of the organisation you added a theme for in the `org_themes` array.
+
+And to allow admins to switch between them at will, add the theme name to the data-theme attribute of a new button in the 'admins/theme_select' partial.
