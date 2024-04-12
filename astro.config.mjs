@@ -32,16 +32,9 @@ export default defineConfig({
 							link: "/event/1_overview",
 						},
 						{
-							label: "API",
-							link: "/event/apis",
-						},
-						{
-							label: "Generating Views",
-							link: "/event/generating_views",
-						},
-						{
-							label: "PDF",
-							link: "/event/pdf",
+							label: "Processes",
+							collapsed: true,
+							autogenerate: { directory: "/event/processes" },
 						},
 						{
 							label: "AWS",
