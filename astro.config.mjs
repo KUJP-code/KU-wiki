@@ -29,8 +29,12 @@ export default defineConfig({
 					items: [
 						{
 							label: "Overview",
-							collapsed: true,
 							link: "/event/1_overview",
+						},
+						{
+							label: "Processes",
+							collapsed: true,
+							autogenerate: { directory: "/event/processes" },
 						},
 						{
 							label: "AWS",
