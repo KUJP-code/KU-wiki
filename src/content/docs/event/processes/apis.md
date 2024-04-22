@@ -6,7 +6,9 @@ editUrl: false
 
 ## GAS Summary API
 
-Request will contain an array of event names they want stats for (determined in sheets by the close dates in sheets for those events) and an API key (set on the event site side by an ENV variable)
+Request will contain an array of event names they want stats for (determined in sheets by the close dates in sheets for those events) and an API key (set on the event site side by an ENV variable).
+
+The endpoint is a GET request to `/gas_summary`, so an example request would be `https://kids-up.app.com/gas_summary?events[]=Summer+School&accessKey=12345`.
 
 Needs to return these values for each event at each school which is ongoing or closed less than a month ago, as a hash keyed by event name and school id.
 
