@@ -6,6 +6,32 @@ Docker is used to create/run containers, basically lightweight VMs. You can conf
 
 Rails > 7.1.2 comes with a Dockerfile by default, and if you need to build a more complex one the [Fly.io generator](https://github.com/fly-apps/dockerfile-rails) is helpful (and may have been merged into Rails anyway by the time someone other than me reads this).
 
+## Stuff specific to us
+
+There are a few things not in version control required to run compose for local testing, namely some environment variables needed by `docker-compose.yml`.
+
+```
+# .env/development/database
+
+RDS_PASSWORD={whatever your password is}
+RDS_USERNAME=postgres
+RDS_DB_NAME=db_prototype_v2_development
+POSTGRES_PASSWORD={whatever your password is}
+POSTGRES_USERNAME=postgres
+```
+
+```
+# .env/development/web
+
+SECRET_KEY_BASE=1
+RDS_HOSTNAME=database
+S3_BUCKET_NAME=test
+```
+
+When you run docker-compose the first time you might get some database related errors because it's not set up yet. Just run `docker-compose exec -it bash` to get into the shell for the web container, then `bundle exec rails db:create` to set the DB up for the first time and `bundle exec rails db:migrate` to apply all the migrations. Also migrate each time you add new migrations.
+
+Since login is required for all our sites you'll also want to `bundle exec rails c` while in the container shell and add an admin account to log in with.
+
 ## Installation
 
 You'll want to go [here](https://www.docker.com/get-started/) for the community edition of Docker Desktop for your OS, then [to the docs](https://docs.docker.com/desktop/) for detailed installation instructions for your OS. You can technically just install the CLI and use that but if you need to read this you'll probably appreciate having a GUI.
