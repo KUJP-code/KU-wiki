@@ -32,6 +32,11 @@ export default defineConfig({
 							link: "/event/1_overview",
 						},
 						{
+							label: "Resources",
+							collapsed: true,
+							autogenerate: { directory: "/event/resources" },
+						},
+						{
 							label: "Processes",
 							collapsed: true,
 							autogenerate: { directory: "/event/processes" },
