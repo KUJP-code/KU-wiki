@@ -15,9 +15,11 @@ Needs to return these values for each event at each school which is ongoing or c
 ### Seasonal
 
 - School id
-- Number of internal + reservation
+- Number of internal
+- Number of reservation
 - Number of external
-- Internal + res revenue
+- Internal revenue
+- Reservation revenue
 - External revenue
 - Total revenue
 - Goal
@@ -46,10 +48,12 @@ Needs to return these values for each event at each school which is ongoing or c
     "Summer School 2023": [
         {
             "school_id": 2,
-            "member_count": 10,
-            "member_revenue": 100,
+            "internal_count": 10,
+            "internal_revenue": 100,
             "external_count": 5,
             "external_revenue": 50,
+            "reservation_count": 5,
+            "reservation_revenue": 50,
             "total_revenue": 150,
             "goal": 200
         },
