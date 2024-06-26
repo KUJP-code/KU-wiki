@@ -14,6 +14,10 @@ description: Notes on designing new SS
 - Type: Individual/Monthly
 - Status: not finalized/confirmed/cancelled/invalid
 
+## Emails
+
+Non-admin users may need to be able to schedule/search scheduled email jobs, probably make a separate queue to enable this.
+
 ## Students
 
 Students seem to have basically everything on them, especially the search form allows searching for stuff like parent/contract details which would probably be better to search from a controller specific to them.
