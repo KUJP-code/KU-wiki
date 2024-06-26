@@ -10,6 +10,8 @@ editUrl: false
 | ----------------------------------------- | ----------- | -------------- | ----------------------------------- |
 | [SolidQueue Cleanup](#solidqueue-cleanup) | Event & LMS | Sun @ midnight | Removes completed jobs > 7 days old |
 
+We also have an unofficial 'cron' job that needs to be done at the end of each seasonal event. Every student who attended that event needs to have their 'first_seasonal' column toggled to `false`, or they won't get a repeater discount for the next seasonal event. This should be done after all invoices are confirmed to avoid applying the discount to the event which just finished.
+
 ## Details
 
 ### SolidQueue Cleanup
