@@ -140,6 +140,7 @@ Can search by:
 13. What are number remaining and courses remaining (残数, 受講残数)?
 14. How is 'contract group info' (契約グループ情報指定) different from 'contract info' (契約情報指定)?
 15. What do the 4 course/contract dropdowns that add extra fields represent? How are they different?
+16. Do we want SSIDs as a range? Anyone use that? And what for?
 
 ### Student Import
 
@@ -229,6 +230,76 @@ Has search fields for:
 1. Confirm it is for scheduling emails to be sent en masse later/that you can search for past mass emails.
 2. What are embedded characters?
 3. Do we ever send separate body/subject for PC/mobile?
+
+### Student Announcements
+
+Form to create new announcement has:
+
+- Subject
+- School
+- Staff
+- Notice period: as a range
+- announcement location: checkboxes for PC/smartphone/both
+- content for PC
+- content for smartphone
+- attachments
+- internal notes
+- send email notification: checkbox to determine whether students should receive an email about the announcement
+- some way of adding filters to narrow down the recipients
+  - There are also options to filter the recipients by contract or child info, unsure if this is part of the earlier heading or in addition to it
+- a way of adding schools to send the notification to, seems groups are possible
+- buttons to save as draft (it won't be published when the date hits) or save (it will)
+
+Search form for student announcements, with following filters:
+
+- Subject
+- School
+- Staff
+- Notice period: as a range
+- publication status: draft/waiting/published/publication finished
+
+#### Questions
+
+1. Do we use the separate PC/smartphone content?
+2. What options do you have for narrowing down the recipients in お知らせ対象?
+
+### Student Attendance
+
+Fields are:
+
+- SSID: as a range
+- name
+- attendance date: as a range
+- school
+- room
+- checkboxes for arrived or not and a time range to narrow it
+- checkboxes for left or not and a time range to narrow it
+- order by attendance date, SSID, entry time, departure time in asc or desc
+
+The form adds internal notes and a checkbox to notify parents or not.
+
+### Questions
+
+1. Is this actually attendance? Google translates as entry/exit
+2. What is 'room'(ルーム)/ do we need it?
+
+### School year registration
+
+Seems to be a way of setting the year kids are in at school based on their age?
+
+#### Questions
+
+1. This is marked as used by basically everyone, but I don't understand why it would ever be used after being initially set/why it would need to be configurable?
+
+### School year update
+
+You can choose to update by incrementing their grade by one year, or calculating it from their birthday.
+
+There's a table showing the history of updates and who did them. Based on that they do in fact manually update every single year.
+
+#### Questions
+
+1. Why is this manual? I can't think of any possible reason, and can think of so many for it to not be manual. I want to make sure I'm not missing something here, cos this and the last one seem completely pointless to me.
 
 ## Contract Management
 
