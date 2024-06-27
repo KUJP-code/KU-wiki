@@ -3,6 +3,8 @@ title: New SS Design
 description: Notes on designing new SS
 ---
 
+For each of the sections, a good way to get a list of all the fields would be to download the sample CSV from the import page. They seem to be pretty comprehensive.
+
 ## Addons
 
 - Need to track what extra courses they've paid for (like online, keep up)
