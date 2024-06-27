@@ -7,18 +7,19 @@ For each of the sections, a good way to get a list of all the fields would be to
 
 ## Addons
 
-- Need to track what extra courses they've paid for (like online, keep up)
+- Need to track what extras they've paid for (like online, keep up)
 
-## Contracts
+## Contracts - 契約
 
-### Fields
-
-- Type: Individual/Monthly
-- Status: not finalized/confirmed/cancelled/invalid
+## Courses - コース
 
 ## Emails
 
 Non-admin users may need to be able to schedule/search scheduled email jobs, probably make a separate queue to enable this.
+
+## Lessons - レッスン
+
+## Rooms - ルーム
 
 ## Students
 

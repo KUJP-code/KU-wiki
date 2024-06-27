@@ -278,7 +278,7 @@ Fields are:
 
 The form adds internal notes and a checkbox to notify parents or not.
 
-### Questions
+#### Questions
 
 1. Is this actually attendance? Google translates as entry/exit
 2. What is 'room'(ルーム)/ do we need it?
@@ -555,7 +555,7 @@ Button to download sample CSV.
     - Student date: as a range
     - Class time
 
-### Questions
+#### Questions
 
 1. Which deposit methods do we use/do we want to use?
 2. Would be nice to have proper translations for the ones we use.
@@ -709,8 +709,60 @@ Seems to be a way of sending emails from a billing template, where they just fil
 
 ## Lesson Management
 
+### Lessons
+
+Seem to be the different levels/times they can sign up for, like Keep Up/Specialist/seasonal(am/pm), maybe early arrival options, kindy arriving at 1:30/3 etc.
+
+#### Questions
+
+1. This seems to be most of the things we charge for, are the contracts etc. just collections of these?
+2. Do the limits on people to use them actually do anything, cos they seem low?
+
+### Lesson Data Import
+
+### Reservation status (by room)
+
+Seems to be a way of listing all the lesson reservations by month/day/week or in a list. For time based views it's shown in a calendar-like table with rows for each school/level combination.
+
+#### Questions
+
+1. Are rooms levels? e.g. galaxy, land, sky
+
+### Attendance status
+
+Searchable list of attendance. Editing is done from the table of results by pushing buttons.
+
+### Reservation slot
+
+Seems like a list of all the potential times/dates the 'Lesson's can be delivered at and their available slots/attendance.
+
+#### Questions
+
+1. Am I right about the purpose of the page?
+2. Is this the same info as the attendance status page in a different format?
+
+### Reservation Slot templates/batch creation/import
+
+Templates for whatever the previous one is, and a way to bulk create them (using the templates). There's another one after it that seems identical.
+
+Import does the usual stuff.
+
+#### Questions
+
+1. What's the difference between 予約枠一括作成 and 予約枠一括作成・取込履歴?
+2. What is 予約枠テンプレートデータ取込, and 予約枠 in general?
+
 ## Instructor Management
+
+The only thing they use it for is IP locks, we can do that through schools so nothing to implement here from the SS, we'll just be adding our own features.
 
 ## School Management
 
 ## System Management
+
+### Operation log inquiry
+
+#### Questions
+
+1. Do we need logs of interaction? e.g. test result changes, student changes. DO we need to log all changes for everything or can there be a cutoff?
+2. With changes? Or just when and who did it?
