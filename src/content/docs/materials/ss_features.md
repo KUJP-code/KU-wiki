@@ -758,6 +758,124 @@ The only thing they use it for is IP locks, we can do that through schools so no
 
 ## School Management
 
+### School
+
+Search form and a button to create a new one.
+
+- Search
+  - Name
+  - Validity period??
+  - Visibility
+- Create
+  - Name
+  - Kana
+  - Display name
+  - Address input: postcode/prefecture/line1/line2, also option to automatically set from postcode
+  - Phone
+  - Fax
+  - Sending email address
+  - confirmation email address
+  - validity period: as a range
+  - displayed/hidden
+  - remarks
+  - notes for billing email
+  - transfer information
+  - group: this would be area for us
+  - student restrictions
+    - close registrations (can only be added to a waitlist, school is full)
+    - prevent cancellations by parents (only school can cancel reservations)
+  - student limits
+    - cannot transfer to substitute course
+    - students cannot cancel their classes
+
+#### Questions
+
+1. Is there any reason we'd need the validity period for schools? They all seem infinite. Is there any record we do use the validity period field on, like contracts/courses/templates?
+2. Do we need separate names and display names?
+3. Is 送信メールアドレス the address that school sends mail from? And 確認メールアドレス is where they receive notification emails from the system?
+4. What are 請求メール用備考 and 振込先情報?
+5. What are 受講振替登録制限 and 受講キャンセル制限 restrictions? Do we use them?
+6. What fields do we actually use from the creation form?
+
+### School Data Import
+
+The usual import view, just a file field and confirmation screen after.
+
+### School Groups
+
+Yeah these are literally just areas.
+
+### Room
+
+This seems to be a mixture of levels, courses and seasonal stuff. Maybe some completely different thing repurposed to serve a bunch of purposes.
+
+- Search
+  - School
+  - name (partial matching)
+  - validity period
+- Create
+  - School (that the room belongs to, can only be one)
+  - name
+  - Kana
+  - display name
+  - extension number
+  - capacity
+  - validity period
+  - remarks
+  - same student restrictions as schools
+
+#### Questions
+
+1. This seems to represent a lot of loosely related stuff that's not quite the same, like courses but also some levels which don't seem to correspond to our level system and seasonal school. Is this actually all one category of stuff or are there some things in here that aren't really the same as the rest, and if it is one category what exactly is it?
+
+### Room Data Import
+
+Standard.
+
+### Staff
+
+- Search
+  - staff code: as a range
+  - name
+  - school
+  - validity period
+  - instructor collaboration: radio for all/available/not available
+  - email
+  - login: checkboxes for login or not, if login then a range of last login date
+- Create
+  - staff code
+  - name
+  - kana
+  - school
+  - validity period
+  - remarks
+  - whether to display schools based on search conditions?
+  - password/confirmation
+  - email 1 & 2
+    - receive notification emails or not
+    - receive message received notifications or not
+  - permissions
+
+#### Questions
+
+1. What's 講師連携 and what do the options do?
+2. What's 校舎検索条件/検索条件の校舎を初期表示しない in the form to create new staff?
+3. What can each role/permission set do?
+4. Would bilingual teachers have different permissions to native teachers?
+5. Do we have any users who have a combination of permissions from multiple roles? If so who and why?
+
+### Staff Data Import
+
+As usual.
+
+### School permissions
+
+- Controls which schools staff can access, we'd do this with Pundit.
+
+### School permissions import
+
+As usual.
+
 ## System Management
 
 ### Operation log inquiry
