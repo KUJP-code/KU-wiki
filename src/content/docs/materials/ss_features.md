@@ -125,22 +125,21 @@ Can search by:
 
 #### Questions
 
-1. Why is SSID split into 2 fields?
-2. Does anyone use the ability to save search filters?
-3. What does 'registered staff' (登録スタッフ) do?
-4. What are 'consolidated students' (集約先生徒) and what do they do?
-5. What does ' 集約先種別' do?
-6. What does 'account transfer request destination' (口座振替依頼先) do?
-7. How is management ID different to SSID?
-8. Does anyone have restrictions on phone contact? As text or just yes/no?
-9. How is 'scheduled start date of lessons' (レッスン開始予定年月) different from start date? Same for 退会月/予約キャンセル受付月 and quit date?
-10. What's a 'transfer period' (転籍時期)?
-11. Which fields do we actually use?
-12. What's "契約コース, コースを指定する" (contract course/specify course)
-13. What are number remaining and courses remaining (残数, 受講残数)?
-14. How is 'contract group info' (契約グループ情報指定) different from 'contract info' (契約情報指定)?
-15. What do the 4 course/contract dropdowns that add extra fields represent? How are they different?
-16. Do we want SSIDs as a range? Anyone use that? And what for?
+1. Does anyone use the ability to save search filters?
+2. What does 'registered staff' (登録スタッフ) do?
+3. What are 'consolidated students' (集約先生徒) and what do they do?
+4. What does ' 集約先種別' do?
+5. What does 'account transfer request destination' (口座振替依頼先) do?
+6. How is management ID different to SSID?
+7. Does anyone have restrictions on phone contact? As text or just yes/no?
+8. How is 'scheduled start date of lessons' (レッスン開始予定年月) different from start date? Same for 退会月/予約キャンセル受付月 and quit date?
+9. What's a 'transfer period' (転籍時期)?
+10. Which fields do we actually use?
+11. What's "契約コース, コースを指定する" (contract course/specify course)
+12. What are number remaining and courses remaining (残数, 受講残数)?
+13. How is 'contract group info' (契約グループ情報指定) different from 'contract info' (契約情報指定)?
+14. What do the 4 course/contract dropdowns that add extra fields represent? How are they different?
+15. Do we want SSIDs as a range? Anyone use that? And what for?
 
 ### Student Import
 
@@ -157,8 +156,7 @@ Also seems to be a CSV upload followed by a confirmation tab.
 #### Questions
 
 1. Why do we use this?
-2. What data does the CSV upload contain?
-3. Would you be open to a version which doesn't require a CSV? What should it look like in terms of fields to search by etc.
+2. Would you be open to a version which doesn't require a CSV? What should it look like in terms of fields to search by etc.
 
 ### Medical Record
 
@@ -877,6 +875,63 @@ As usual.
 As usual.
 
 ## System Management
+
+**Gave up on this one part way through, so over detailed I need to sit down with someone and hash out what actually needs to be configurable/can be hardcoded**
+
+### PS Usage Status
+
+PS is Platinum School, the platform.
+
+For the current and previous month, shows:
+
+- number of registered students
+- number of enrolled students
+- storage used
+- number of entry/exit terminals
+- emails sent
+
+#### Questions
+
+1. What are 入退室端末数?
+2. How are we storing 58.5 GB of data? Do we store files here or is it all the database?
+3. Nakagawa san apparently uses this, what information is important from here? Is there other information that would be useful? The available info here seems very random/limited.
+
+### Language settings
+
+We have other ways of doing this, can be done per user.
+
+### "Basic" Configuration
+
+#### School info
+
+Probably more like org info in LMS context
+
+- Name
+- Kana name
+- Address (as other address fields)
+- Phone
+- Start on Sunday or Monday
+- New arrival display period: in days
+- School title
+
+#### School closure/holidays
+
+- Display holidays on calendar or not
+- Use school holidays checkbox
+- Title of closed days
+
+#### Aliases for student info fields
+
+We can do this with translations/helpers if necessary. The same for course, lesson and class etc. aliases below.
+
+#### Contract/Sales info
+
+- Checkboxes to enable monthy/individual contracts
+- Radio button for default contract type
+
+#### Questions
+
+0. What configuration options from this page are actually useful, and which can we just have as defaults? For example as far as I'm aware the start date of Japanese school doesn't often change, that could just be hardcoded (and is on the event site, so we don't need to manually adjust grades)
 
 ### Operation log inquiry
 
