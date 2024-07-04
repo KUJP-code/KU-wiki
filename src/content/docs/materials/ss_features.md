@@ -126,10 +126,17 @@ Can search by:
 #### Questions
 
 1. Does anyone use the ability to save search filters?
+   - Yeah, they all use it. Will need to implement.
 2. What does 'registered staff' (登録スタッフ) do?
+   - That's the staff member who created the student. Used infrequently, in most cases like finding out who changed something is probably covered by logidze.
 3. What are 'consolidated students' (集約先生徒) and what do they do?
+   - Basically siblings, we'll have this with the link to parents
 4. What does ' 集約先種別' do?
+   - Basically this is whether they are the internal sibling used to link siblings, the external sibling linked to the internal one or no siblings
+   - If we keep this, would probably be a siblings/no siblings toggle
 5. What does 'account transfer request destination' (口座振替依頼先) do?
+   - Tracks where their payment information comes from (currently Zeus)
+   - This is probably replaced by a separate payment method table or something similar depending on how we implement payment processing
 6. How is management ID different to SSID?
 7. Does anyone have restrictions on phone contact? As text or just yes/no?
 8. How is 'scheduled start date of lessons' (レッスン開始予定年月) different from start date? Same for 退会月/予約キャンセル受付月 and quit date?

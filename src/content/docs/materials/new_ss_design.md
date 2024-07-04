@@ -21,6 +21,15 @@ Non-admin users may need to be able to schedule/search scheduled email jobs, pro
 
 ## Rooms - ルーム
 
+## Search Forms
+
+Will need a way to save and retrieve search filters.
+
+- Could be in a JSONB col on that user
+- Or in a separate table per model
+- Or a combined table for all models
+- Or, something like prepared statements or materialized views (basically an internal DB thing)
+
 ## Students
 
 Students seem to have basically everything on them, especially the search form allows searching for stuff like parent/contract details which would probably be better to search from a controller specific to them.
