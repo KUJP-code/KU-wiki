@@ -138,15 +138,21 @@ Can search by:
    - Tracks where their payment information comes from (currently Zeus)
    - This is probably replaced by a separate payment method table or something similar depending on how we implement payment processing
 6. How is management ID different to SSID?
+   - SSID (student code) is used for My Page, management ID is for account registration
 7. Does anyone have restrictions on phone contact? As text or just yes/no?
+   - Not really used, don't need to add this
 8. How is 'scheduled start date of lessons' (レッスン開始予定年月) different from start date? Same for 退会月/予約キャンセル受付月 and quit date?
+   - Seems one is a less specific (only year and month) value entered to start with, then when the contract is 'registered' the actual start date is added
 9. What's a 'transfer period' (転籍時期)?
-10. Which fields do we actually use?
-11. What's "契約コース, コースを指定する" (contract course/specify course)
-12. What are number remaining and courses remaining (残数, 受講残数)?
-13. How is 'contract group info' (契約グループ情報指定) different from 'contract info' (契約情報指定)?
-14. What do the 4 course/contract dropdowns that add extra fields represent? How are they different?
-15. Do we want SSIDs as a range? Anyone use that? And what for?
+   - Seems to just be the date they transferred from another school
+10. What's "契約コース, コースを指定する" (contract course/specify course)
+    - Not answered
+11. What are number remaining and courses remaining (残数, 受講残数)?
+    - How many more days the kid can attend based on their contract, and how many days they have registered to attend and haven't used
+12. How is 'contract group info' (契約グループ情報指定) different from 'contract info' (契約情報指定)?
+    - Not answered
+13. Do we want SSIDs as a range? Anyone use that? And what for?
+    - Not answered
 
 ### Student Import
 
@@ -163,7 +169,9 @@ Also seems to be a CSV upload followed by a confirmation tab.
 #### Questions
 
 1. Why do we use this?
-2. Would you be open to a version which doesn't require a CSV? What should it look like in terms of fields to search by etc.
+   - New SMs do a lot of test registrations, so it's nice to be able to delete them all at once
+   - This is probably useful, but not high prio
+   - Maybe a variation on the search controller/addon to its destroy action that deletes all records matching a query?
 
 ### Medical Record
 
@@ -180,7 +188,10 @@ The form for creating new medical data has:
 #### Questions
 
 1. Why is there a date and time of entry? Is that not when you submit the form?
+   - Apparently useful, and I guess info might be input a while after the event if any
+   - So probably just set to current date/time by default and let them change it
 2. What exactly is a medical record? Health info? Or when a kid gets hurt?
+   - Seems to be like notes, there can be a bunch of them and they cover different things
 
 ### Medical Record Import
 
@@ -232,9 +243,12 @@ Has search fields for:
 
 #### Questions
 
-1. Confirm it is for scheduling emails to be sent en masse later/that you can search for past mass emails.
+1. Confirm it is for scheduling emails to be sent en masse later/that you can search for past mass emails
+   - Yep
 2. What are embedded characters?
+   - Ah, the ability to interpolate variables in the email
 3. Do we ever send separate body/subject for PC/mobile?
+   - No
 
 ### Student Announcements
 
@@ -266,7 +280,9 @@ Search form for student announcements, with following filters:
 #### Questions
 
 1. Do we use the separate PC/smartphone content?
+   - No
 2. What options do you have for narrowing down the recipients in お知らせ対象?
+   - Standard student fields I think
 
 ### Student Attendance
 
@@ -286,7 +302,9 @@ The form adds internal notes and a checkbox to notify parents or not.
 #### Questions
 
 1. Is this actually attendance? Google translates as entry/exit
+   - Yeah it's every time a student scans their card
 2. What is 'room'(ルーム)/ do we need it?
+   - Room/course/reservation slot are required, but didn't tell me what they are
 
 ### School year registration
 
@@ -295,6 +313,7 @@ Seems to be a way of setting the year kids are in at school based on their age?
 #### Questions
 
 1. This is marked as used by basically everyone, but I don't understand why it would ever be used after being initially set/why it would need to be configurable?
+   - Yeah it's fine if we calc automatically based on birthday, they wanna add up to HS tho
 
 ### School year update
 
@@ -305,6 +324,8 @@ There's a table showing the history of updates and who did them. Based on that t
 #### Questions
 
 1. Why is this manual? I can't think of any possible reason, and can think of so many for it to not be manual. I want to make sure I'm not missing something here, cos this and the last one seem completely pointless to me.
+   - Yeah automatically calculating is fine, as above
+   - Maybe still store the grade in a col for easy querying if needed, then have a SQ job that runs once a year at midnight on the morning of April 2nd lol
 
 ## Contract Management
 
@@ -366,13 +387,25 @@ Lets you create a contract from a list of templates. Can select from the list, o
 #### Questions
 
 0. Just a general overview of what contracts/courses are for and how they interact would be very helpful.
+   - Not answered
 1. What is 表示単位: 契約単位/契約グループ単位?
+   - The group one is a 'parent contract' which can apparently have sub contracts
+   - So I guess the 'parent contract' is the one parents sign to be part of the school, and the sub-contracts are individual things like KeepUp/parties etc?
+   - Asked for more details on this
 2. What does the 'specifies a course' (コースを指定する) checkbox mean?
+   - Not answered
 3. What's the difference between these for CSV output? 契約コース単位で出力/契約金額内訳単位で出力
+   - Whether to include the 'parent contract' or 'child contract' information
 4. How does pausing a course work? Do you just enter a number of days it was paused, or the actual range of dates it was paused? Can there be multiple separate pauses?
+   - There can be multiple pauses, but total is limited to 2 months a year
+   - They enter range of dates for the pause
 5. What's the difference between contract registration staff and assigned staff?
+   - Contract X is who entered it/where it was entered, but registered X is the person/place actually responsible for the student
+   - Usually the same but can be different when SMs go to help at other schools
 6. What's up with 金額内容/金額タイプ? Is there a contract for each of these, are they add-ons to the contract? They're all predefined by us?
+   - Not answered
 7. What's the difference between the different dates? Like acceptance date (契約受付日), continuation start date (継続開始年月) etc.
+   - Acceptance date is when the contract is registered in the SS, continuation start date is the month we start charging them
 
 ### Import Contract Data
 
@@ -381,10 +414,6 @@ Lets you create a contract from a list of templates. Can select from the list, o
 - Radio button for whether the imported contracts should be marked not finalized or confirmed
 - File field
 - A button to download a sample CSV
-
-#### Questions
-
-1. Why the toggle for individual/monthly and confirmed/not? Couldn't that just be part of the CSV data?
 
 ### Contract Templates
 
@@ -434,8 +463,12 @@ Search form and a button to create them.
 #### Questions
 
 1. What is the class option here? I assume it's different from 'room' in other forms, what's the difference?
+   - Not answered
 2. In 契約条件, what do all the options for 契約受付日 do? The contract acceptance date is calculated?
+   - Usually it's set automatically when created, but in certain circumstances can be entered manually
+   - Seems we never need to calculate it
 3. The two options for 算出設定 seem the same to me when translated, what's the difference?
+   - Not answered
 
 ### Sales
 
@@ -448,7 +481,7 @@ Search form for sales, buttons for sales registration/return registration.
   - Sales status: not confirmed/confirmed/invalid, checkboxes for all and one to select all
   - Sales/contract number: as range
   - Sales date: as a range
-  - Child status: checboxes inquirier/student
+  - Child status: checkboxes inquirier/student
   - Child
   - Inquirer
   - Sales staff
@@ -510,9 +543,16 @@ Rather than payment info, refunds have
 #### Questions
 
 1. What's the difference between sales and return (販売種別/販売/返品/販売登録種別/契約/販売)?
+   - We don't use 'returns', so not needed
+   - The difference between sale/contract is whether it's registered from contract or sale information, but I don't understand the difference between them/why a sale would not be registered from a sale
 2. What's the difference between sales unit and sales item unit (販売単位/販売明細単位)?
+   - Not answered
 3. What's inquirer (問合せ者)?
+   - Kind of like an external student?
+   - We mark students like this cos we're charged based on number of internal students
+   - I assume some features are disabled for this type of student?
 4. Do we add the line types (明細タイプ) ourselves?
+   - Not answered
 
 ### Import Sales
 
@@ -629,11 +669,19 @@ Create button, search fields
 #### Questions
 
 1. Why is there a separate display name?
+   - Not answered
 2. What is change number of contracts (契約数変更)? And the options (個別契約で契約数の変更を可能とする/月謝契約（初回）で契約数の変更を可能とする/月謝契約（継続）で契約数の変更を可能とする)
+   - Basically allows the number of 'contracts' to be changed if students start in the middle of the month
 3. We don't use carryover info right? That section is red on the sheet
+   - Yep, not used
 4. What's コース予約設定情報? What difference does selecting one of the options make?
+   - Sets the limit for makeup lessons
+   - Currently makeup lessons are only available to kindy??
 5. What are course transfers (受講振替)? And the associated options?
+   - Also related to makeup lessons for kindy
 6. What are the options from the first column in 受講日程?
+   - Allows selecting the days/times the kid is gonna attend
+   - Can be autofilled from contracts
 
 ### Course Data Import
 
@@ -647,15 +695,23 @@ Button to download sample CSV
 #### Questions
 
 1. What's this used for?
+   - Specific tab for makeup lessons
 2. Are we likely to need to add more or is it pretty set?
+   - Current setup is fine
 3. Can I get an overview of what the restrictions are/what they apply to? e.g only apply to a single course or can apply to multiple
+   - Not really answered, but in general are restrictions on makeup lessons
+   - Are set individually for each course I think
 
 ### Monthly contract continuation
 
 #### Questions
 
 1. Does this section just give staff a way to copy contracts that are going to be renewed from previous months?
+   - I think yes in general
+   - But for 'contract groups'
+   - Why would they need to be changed/refreshed monthly? Does this apply only to monthly contracts, or are all contracts refreshed monthly?
 2. What's the difference between the initial page and the one you can access from the 継続状況確認 button in the top right?
+   - Button shows the history
 
 ### Contract amount details
 
@@ -677,7 +733,9 @@ Can search or create. Separate page for import, just the file field.
 #### Questions
 
 1. What exactly are these? Looks like charges that fall into categories from the line items above, but only some of them?
+   - Seems to be a list of all the individual billed amounts, full list of items sold and contract courses
 2. What's the 月別設定 option on the form for? Is it used?
+   - Not answered
 
 ### Teaching Materials
 
@@ -686,6 +744,7 @@ Seems to be much the same as contract amount details, is it just a different cat
 #### Questions
 
 1. Is this just a different category of contract amount details, but the same basic idea?
+   - Yeah
 
 ### Discount
 
@@ -694,6 +753,7 @@ Seems to be much the same as contract amount details, is it just a different cat
 #### Questions
 
 1. Is this one also basically the same as contract amount details?
+   - Yeah
 
 ### Account transfer list
 
@@ -702,7 +762,11 @@ This seems to be where you can create of options for account transfers, currentl
 #### Questions
 
 1. Do we need an interface to add these or can they be part of the code?
-2. What context are they used/selected in?
+   - Currently downloads CSV files to be registered in Zeus
+   - In the new system customer information should jump to the bank site when clicked to complete billing
+   - I assume there's more info to come on how we're handling billing
+2. When do we use the 口座振替 and what for?
+   - For temporary billing closures around the 10th of each moneht and 13th-15th
 
 ### Billing emails
 
@@ -720,8 +784,11 @@ Seem to be the different levels/times they can sign up for, like Keep Up/Special
 
 #### Questions
 
-1. This seems to be most of the things we charge for, are the contracts etc. just collections of these?
+1. How are these different from ルーム and コース?
+   - Rooms are the slots for each time
+   - Courses are chosen when the SM makes a contract, give access to rooms?
 2. Do the limits on people to use them actually do anything, cos they seem low?
+   - Not answered
 
 ### Lesson Data Import
 
@@ -732,6 +799,7 @@ Seems to be a way of listing all the lesson reservations by month/day/week or in
 #### Questions
 
 1. Are rooms levels? e.g. galaxy, land, sky
+   - No, more like time slots I think
 
 ### Attendance status
 
@@ -744,7 +812,10 @@ Seems like a list of all the potential times/dates the 'Lesson's can be delivere
 #### Questions
 
 1. Am I right about the purpose of the page?
+   - It's for items that can't be created from a template because we don't usually offer them
+   - e.g. Saturday lessons
 2. Is this the same info as the attendance status page in a different format?
+   - Reservations slots are created to enter attendance in, so must be created before attendance
 
 ### Reservation Slot templates/batch creation/import
 
@@ -755,7 +826,11 @@ Import does the usual stuff.
 #### Questions
 
 1. What's the difference between 予約枠一括作成 and 予約枠一括作成・取込履歴?
+   - For bulk creation, there are templates and you just choose the period plus an appropriate template to register
+   - Lets you see the history of bulk creation and delete in bulk
 2. What is 予約枠テンプレートデータ取込, and 予約枠 in general?
+   - First once allows creating multiple reservation slots in bulk (not needed)
+   - In general reservation slots are used to show students on the attendance sheet
 
 ## Instructor Management
 
@@ -796,11 +871,16 @@ Search form and a button to create a new one.
 #### Questions
 
 1. Is there any reason we'd need the validity period for schools? They all seem infinite. Is there any record we do use the validity period field on, like contracts/courses/templates?
+   - No, can just delete/soft delete
 2. Do we need separate names and display names?
+   - No
 3. Is 送信メールアドレス the address that school sends mail from? And 確認メールアドレス is where they receive notification emails from the system?
+   - Yep
 4. What are 請求メール用備考 and 振込先情報?
+   - Notes for billing per school, not currently used but may be in future
 5. What are 受講振替登録制限 and 受講キャンセル制限 restrictions? Do we use them?
-6. What fields do we actually use from the creation form?
+   - Whether students can register for courses or are placed on a waitlist, globally for school
+   - Not currently used but should keep in case
 
 ### School Data Import
 
@@ -813,6 +893,8 @@ Yeah these are literally just areas.
 ### Room
 
 This seems to be a mixture of levels, courses and seasonal stuff. Maybe some completely different thing repurposed to serve a bunch of purposes.
+
+They're the number of slots available for each time I think.
 
 - Search
   - School
@@ -864,10 +946,16 @@ Standard.
 #### Questions
 
 1. What's 講師連携 and what do the options do?
+   - Seems to be whether the user can access the SS from IPs outside schools
+   - Done through a separate 'teacher site' with 'teacher permissions'
+   - What's the teacher site?
 2. What's 校舎検索条件/検索条件の校舎を初期表示しない in the form to create new staff?
+   - Not needed
 3. What can each role/permission set do?
+   - Not answered
 4. Would bilingual teachers have different permissions to native teachers?
 5. Do we have any users who have a combination of permissions from multiple roles? If so who and why?
+   - No combinations of permissions
 
 ### Staff Data Import
 
@@ -885,64 +973,126 @@ As usual.
 
 **Gave up on this one part way through, so over detailed I need to sit down with someone and hash out what actually needs to be configurable/can be hardcoded**
 
-### PS Usage Status
+### PS usage status ＰＳ利用状況
 
-PS is Platinum School, the platform.
+Previously, due to the mail sending limit from SS, we used to confirm how many emails were sent from SS. So not currently used.
 
-For the current and previous month, shows:
+### Language settings 言語設定
 
-- number of registered students
-- number of enrolled students
-- storage used
-- number of entry/exit terminals
-- emails sent
+Basically Japanese should be fine, but it might be good to have a feature that switches to English for foreign staff who do not understand Japanese. This might be useful if considering selling to external companies rather than just within Kids UP.
 
-#### Questions
+### Basic configuration 基本設定
 
-1. What are 入退室端末数?
-2. How are we storing 58.5 GB of data? Do we store files here or is it all the database?
-3. Nakagawa san apparently uses this, what information is important from here? Is there other information that would be useful? The available info here seems very random/limited.
+If the apps can be used by only for KU, fixed items are fine, but if considering selling to other companies, they will be requesting to change item names. This is for features aimed at other companies.
 
-### Language settings
+They're just aliases for models.
 
-We have other ways of doing this, can be done per user.
+### Reservation settings 予約設定 諸橋
 
-### "Basic" Configuration
+Setting cancellation and make up lessons deadlines for parents to manage lessons through the app. Example: Make up lessons are available until 7 days before the desired date, and lesson cancellations are allowed until 9 am on the day of the lesson.
 
-#### School info
+### Deposit settings 入金設定
 
-Probably more like org info in LMS context
+This is also a feature aimed at other companies. Kids UP withdraws on the 27th of every month, but other companies may want to withdraw on a different day. Therefore, it's necessary to include a feature to change the withdrawal date.
 
-- Name
-- Kana name
-- Address (as other address fields)
-- Phone
-- Start on Sunday or Monday
-- New arrival display period: in days
-- School title
+### Payment method 入金方法
 
-#### School closure/holidays
+There are multiple types of payment methods. Besides bank transfer, various methods must be supported when considering use by other companies.
 
-- Display holidays on calendar or not
-- Use school holidays checkbox
-- Title of closed days
+### Design settings デザイン設定
 
-#### Aliases for student info fields
+Also for other companies, it may be better to allow changing colors different from Kids UP's image color.
 
-We can do this with translations/helpers if necessary. The same for course, lesson and class etc. aliases below.
+Handled by our theme switcher.
 
-#### Contract/Sales info
+### Student site link settings
 
-- Checkboxes to enable monthy/individual contracts
-- Radio button for default contract type
+Setting links displayed when parents log into the app. Currently not set, but it might be good to insert event or seasonal application links according to the timing.
 
-#### Questions
+This would be covered by announcements I think, or just adding the links. Could also maybe be set per org I guess.
 
-0. What configuration options from this page are actually useful, and which can we just have as defaults? For example as far as I'm aware the start date of Japanese school doesn't often change, that could just be hardcoded (and is on the event site, so we don't need to manually adjust grades)
+### School site link settings スクールサイトリンク設定
 
-### Operation log inquiry
+Setting links displayed on the top page when employees log into SS. Currently, the Facebook link is displayed on the right side of the top page.
 
-#### Questions
+Same as above.
 
-1. Do we need logs of interaction? e.g. test result changes, student changes. DO we need to log all changes for everything or can there be a cutoff?
-2. With changes? Or just when and who did it?
+### School closing day setting 休校日設定
+
+Every year, set holidays and non-lesson days such as public holidays. If not set, the system may open lessons on public holidays.
+
+Could get this from an API somewhere I'm sure, but would still be org/school specific ones.
+
+### Email settings メール設定
+
+Setting which email address to send emails from when sending emails from outside the school.
+
+Fair enough, will need to look into whether it's even possible to send from not our domain tho. Probably need to verify it in SES.
+
+### Email template settings メールテンプレート設定
+
+Template for automatic emails sent to parents when canceling lessons or similar actions on My Page.
+
+### Billing email settings 請求メール設定
+
+Setting for template contents notifying parents of the billing amount sent on the 20th of every month.
+
+### Permission settings 権限設定
+
+Setting operation permissions for each authority (administrator, SM, bilingual).
+
+Could probably be a pared-down Flipper dashboard if needed for other orgs.
+
+### CSV layout ＣＳＶレイアウト
+
+Used to set a layout of template for downloading various customer data, which data to download and in what order.
+
+Hopefully made redundant by forms I'll build for the exports.
+
+### Excel layout Excelレイアウト
+
+If you want to download Excel data, you can create and register a template here.
+
+### General item settings 汎用項目設定
+
+Setting to increase or hide input items for each item.
+
+### Generic item choices 汎用項目選択肢
+
+Setting to increase or hide input items for each item.
+
+### General-purpose item option data import 汎用項目選択肢データ取込
+
+To import CSV data for the above general items.
+
+### Bank 銀行
+
+Not used in Kids UP, but may be necessary if selling to other companies. If selling a system specifying the destination bank, it is unnecessary.
+
+### Bank branch 銀行支店
+
+Not used in Kids UP, but may be necessary if selling to other companies. If selling a system specifying the destination bank, it is unnecessary.
+
+### Bank/branch data import 銀行・支店データ取込
+
+To input bulk bank information above in CSV page
+
+### Account transfer request destination 口座振替依頼先
+
+To register withdraw bank information
+
+### Terminal settings 端末設定
+
+Settings for scanning KU card machines.
+
+### Student intake layout 生徒取込レイアウト
+
+When downloading CSV, decide which data to display in what order. For example, "Standard Layout 00" can be downloaded by clicking "Save in CSV format" in the "Student Management" → "Student" tab, and you can set the layout here.
+
+### Student item settings 生徒項目設定
+
+Setting the display items for "Student Management" → "Students".
+
+### Operation log inquiry 操作ログ照会
+
+Searching who, when, and what operations were performed under special circumstances.
