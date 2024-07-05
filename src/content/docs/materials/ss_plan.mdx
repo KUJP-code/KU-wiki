@@ -1,0 +1,236 @@
+---
+title: SS Remake Plan
+description: Timeline & breakdown of tasks for SS remake
+---
+import { Steps } from '@astrojs/starlight/components';
+
+We'll want to split the project up into independent sections which can be added separately, as waiting for the whole thing to be ready would take too long/require suddenly switching completely one day which is a recipe for unexpected problems.
+
+I also suggest focusing on making it work for us first, then going through and making features available to other companies. Will greatly reduce the time needed for it to be usable internally. Exceptions to this are obvious features like basic student management which will need to be available from the start.
+
+I've listed each section with in the order I plan to implement them with an approximate time to complete taking into account my existing responsibilities (adding LMS features/support for LMS & event site/online lessons).
+
+Trying to prioritise parent-facing features as it gives us a handy smaller scope to work within and will have an obvious benefit to customers/allow us to start moving them off My Page early.
+
+I think it would be good to have bi-weekly meetings with at least one of the people who frequently uses the SS to check in on my progress and make sure I'm making the stuff they actually need, with a monthly meeting to check in with the larger group and get feedback/suggestions.
+
+## Timeline
+<Steps>
+1. [Registration Forms](#registration-forms) ~ 1 week
+
+	An easy one which'll help a lot and isn't strongly coupled to anything else in the system.
+
+2. [Children](#children) ~ 2 weeks
+
+	This needs to be second because basically everything else depends on children being in the system.
+
+	Add fields to the children stored in the LMS to match the necessary fields from the SS.
+
+3. [Basic Searching & CSV exports](#basic-searching--csv-exports) ~ 2 weeks
+
+    Once the information is in the system, staff need a way to quickly find/export it.
+
+	I need this time to make re-useable core functionality for searching that more detailed/specific search forms can build on later.
+
+4. [Parents](#parents) ~ 1 week
+
+    Add parents to the system and link them with their kids. Allows parents to access test results etc. online.
+
+5. [Schools](#schools) ~ 1 week
+
+   A quick one that can be done anytime, not many changes to make here I think. Should probably be done before emails.
+
+5. [Announcements](#announcements) ~ 1 week
+
+    Useful for the curriculum part as well and doesn't really depend on much, so good to implement early.
+
+6. [Notifications](#notifications) ~ 1 week
+
+   Necessary for messaging to be useful, will also be handy for many other things.
+
+7. [Messaging](#messaging) ~ 1 week
+
+   Extend the existing support message system for use in communication between staff and parents.
+
+8. [Bulk emails (predefined template)](#bulk-emails-predefined-template) ~ 1 week
+
+	Allows for bulk emails to be sent from the LMS.
+
+	Only from predefined templates for now, because it's much faster than letting SMs create their own templates and as far as I'm aware they don't need to do it often? Open to moving up the personalized templates if deemed necessary though.
+
+9. [Medical Records](#medical-records) ~ 1 week
+
+   Can be moved up if they're more important/frequently used than I think they are.
+
+4. [Lessons/contracts/courses/rooms/reservation slots/misc](#lessonscontractscoursesroomsreservation-slotsmisc) ~ ??????
+
+	I cannot untangle this without walking through it with someone who knows it well.
+
+5. [Attendance sheets](#attendance-sheets) ~ 2 weeks
+
+    Limited to generating expected attendance information based on registered attendance days/times.
+
+	Includes adding functionality for parents to view/manage attendance, but not replacing cards.
+
+	Is likely blocked by some element of the previous step, but need more info to know how much.
+
+5. [Payment systems](#payment-systems) ~ 2 weeks
+
+	Blocked by not knowing how we're planning to handle payments or anything related to how we calculate them (the lessons/contracts/etc. section above)
+
+6. [Card replacement](#card_replacement) ~ 2 weeks
+
+    Add a page which uses a phone/iPad camera to scan a kid's QR code/NFC, which automatically clocks them in/out and updates attendance.
+
+10. [Bulk emails (custom template)](#bulk-emails-custom-template) ~ 1-2 weeks
+
+    I'm sure there's a way and have some ideas, but not quite sure how to implement it so would prefer to leave until later unless urgent.
+
+11. [Bus schedule & cancellations](#bus-schedule--cancellations) ~ ???
+
+    Long term future plans. Will need to clarify exactly what we want this to do/how.
+
+12. [Other org customisation options](#other-org-customisation-options) ~ ???
+
+    I'll be designing the whole system keeping in mind that other companies will use it, but actually adding the customisation options would be wasted effort for now.
+
+</Steps>
+
+## Registration Forms
+
+Add a form for parents to fill out during setsumeikais, saved in the database. SMs can open/close for access so can't be filled out at home.
+
+If there's an SS import for these from CSV I can make an export so SMs can easily transfer them between systems.
+
+<Steps>
+	1. Create database table with all necessary info
+	2. Create Pundit policy controlling access
+	3. Create controller and views for user interaction
+	4. Add views & controller actions for staff interaction
+	5. Add CSV export
+</Steps>
+
+## Children
+
+Match the fields in the LMS to the necessary fields from the SS, decide on necessary validations/how to handle data from SS which doesn't pass them, then import all the children.
+
+After the initial import they'll need to be kept in sync from the SS manually like the event site currently is, but I'll add an API so the event site can periodically fetch the latest student info from the LMS in a SQ job.
+
+<Steps>
+	1. Get a confirmed list of fields necessary for students, any new ones
+	2. Add those fields to the LMS students table
+	3. Add a new controller for viewing student's administrative info, add some basic views with the added fields
+	4. Add the API for the event site to fetch updated data from
+	5. Add the SQ job to the event site which grabs the new student data and automatically updates its own database
+	6. Add button to event site to manually sync data for single child
+</Steps>
+
+## Basic Searching & CSV Exports
+
+Need to be able to search by more fields, in ranges etc. Also potentially by associated records. Will need to find out what the core fields people actually use for searching are, maybe a short survey of all the people who use it? Or just chat with the available team. Since one of the goals is to reduce complexity.
+
+Need to implement saved search templates (per user or global?)
+
+Use the search to scope CSV exports.
+
+<Steps>
+	1. Research on best practices for handling complex searches in Rails.
+	2. Create the basic search form/controller
+	3. Implement saveable/reusable search templates
+	4. Allow applying the search to CSV exports
+</Steps>
+
+## Parents
+
+Add all their data from the event site, link them to their kids using the associations from the event site.
+
+Might want to add a 'child student ids' column to the uploader so they can easily be linked with students by other companies too.
+
+<Steps>
+	1. Confirm list of required fields and add them
+	2. Add views for parent homepage/seeing parent information as staff
+	3. Import parents & link to children using event site data (will need to reset password on first login)
+	4. Create API to share data with event site
+	5. Add SQ job to event site to fetch updated data
+	6. Add button to event site to manually sync data for single parent
+</Steps>
+
+## Schools
+
+Mainly to set up for other future stuff like per-school sending addresses in bulk emails.
+
+<Steps>
+	1. Confirm list of required fields and add them
+	2. Update views
+	3. Create API to share data with event site
+	4. Add SQ job to event site to fetch updated data
+	5. Add button to event site to manually sync data for single school
+</Steps>
+
+## Announcements
+
+Need to be able to shown to users matching certain criteria, have start and end dates.
+
+<Steps>
+	1. Create the DB table, model and unit tests
+	2. Add access policy & controller
+	3. Add views/partial for displaying on a page
+</Steps>
+
+## Notifications
+
+Need to be very general, capable of being created and sent to groups of people like announcements but also automatically when certain things happen.
+
+Should have text, subject, a link to the thing being notified about, and whether it's been seen or not.
+
+<Steps>
+	1. Create the DB table, model and unit tests
+	2. Add access policy & controller
+	3. Add views/partial for displaying on a page
+	4. Automatically create in the cases we decide on (will probably include parents submitting registration forms if they're in the system)
+</Steps>
+
+## Messaging
+
+Basically a subset of the support system for parent/SM communication.
+
+Will make use of notifications, automatically creating one when a new message is sent.
+
+## Bulk emails (predefined template)
+
+Allow SMs to send out emails based on certain predefined templates to a subset of parents, set by a search form.
+
+<Steps>
+	1. Determine & create commonly used email templates
+	2. Create policy & controller
+	3. Create the interface for filtering parents and sending the email to all matches
+	4. Create an interface for searching through past bulk emails, seeing if they were sent successfully or not (probably through SQ)
+</Steps>
+
+## Medical records
+
+Should they be visible to/creatable by parents as well? Or just SMs?
+
+Might need to be imported from SS.
+
+<Steps>
+	1. Create the DB table, model and unit tests
+	2. Add access policy & controller
+	3. Add views/partial for displaying on a page
+</Steps>
+
+## Lessons/Contracts/Courses/Rooms/Reservation Slots/Misc
+
+Need to sit down with someone and untangle this before I can plan out how to implement it. There are so many similar seeming things and all the information on them is in Japanese/scattered around.
+
+## Attendance Sheets
+
+Should be able to generate daily attendance sheets with child's expected arrival time.
+
+SMs/teachers can view/print these sheets, and mark students present or absent.
+
+Parents can notify the school if their child will not be attending & give a reason, which is reflected on the staff attendance sheet. Can also request changes to regular attendance, which must be accepted by SM before being applied.
+
+## Card Replacement
+
+Replace the existing cards/scanners with our own QR code/NFC based solution. Even if NFC is possible for us, probably good to have both for other companies.
