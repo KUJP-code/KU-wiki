@@ -20,12 +20,20 @@ Will need to have org-specific translations. Maybe a way to add it to I18n as a 
 
 ## Contracts - 契約
 
+These can be monthly (roll over each month, the main contract for regular attendance) or individual (mostly used for seasonal schools). They need to be rolled over monthly rather than one big one because parents are billed monthly, and we don't have any rules for how to charge if they change partway through a month.
+
+Probably makes sense to have some kind of parent contract that determines how long they roll over for? Or if it's just that just make it a field on the student record?
+
+They can have multiple courses, which determine how many days the kids can attend, and sales which are one-off purchases not affecting attendance. Can't apply sales to the monthly contract because they'd roll over to the next month (can probably solve that by just not copying sales right?).
+
 - Can be paused for up to 2 months each year, multiple pauses allowed
   - Probably implemented as a jsonb col that stores the start and end dates
   - When one is added or edited the end date of the contract is auto updated
   - Will need a validation checking the total pause length is <= 2 months in a year
 
 ## Courses - コース
+
+These are anything affecting schedule/attendance, like kindy 5 hour course or seasonal 3 course. They can be selected from a template then added to a contract.
 
 ## Emails
 
@@ -39,7 +47,11 @@ Will need to have org-specific translations. Maybe a way to add it to I18n as a 
 
 ## Lessons - レッスン
 
+These are templates for creating the rooms, which are created for each day for each school each month.
+
 ## Rooms - ルーム
+
+These are the things students can attend, created from lessons.
 
 ## Search Forms
 
