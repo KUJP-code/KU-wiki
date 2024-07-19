@@ -35,6 +35,12 @@ They can have multiple courses, which determine how many days the kids can atten
 
 These are anything affecting schedule/attendance, like kindy 5 hour course or seasonal 3 course. They can be selected from a template then added to a contract.
 
+An SM requested that you be able to set an attendance limit for the whole kindy course, rather than individually for 3.5 hour and 5 hour courses.
+
+## Elementary schools
+
+Kids need to be linked to/searchable by elementary school, and the schools need to have a 'release time' to make calculating the bus schedule easier.
+
 ## Emails
 
 - Non-admin users may need to be able to schedule/search scheduled email jobs, probably make a separate queue to enable this.
