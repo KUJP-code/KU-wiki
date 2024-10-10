@@ -6,6 +6,10 @@ editUrl: false
 
 ## Prep
 
+:::danger
+Before creating a new seasonal event, and after reservations have closed for the previous event you should visit [here](https://kids-up.app/en/children) and press the button corresponding to the previous seasonal event. This will mark the students who attended that event as having been to a seasonal event previously, which is needed to avoid applying the first seasonal discount multiple times.
+:::
+
 ### Uploading images
 
 If the new event uses new images, you'll want to upload them first. Admins can do this by clicking `Import/Export Files` in the admin tasks card at the bottom of their profile page, then `Upload Assets` on the next screen.
