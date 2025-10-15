@@ -3,52 +3,54 @@ title: Overview
 description: An overview of the materials site.
 editUrl: false
 ---
+## Role Summary
+
+| Role | System Access | Typical Abilities |
+|------|----------------|------------------|
+| **Parents** | Limited to their children's data | Add children to their account, view test results, check homework, and create support tickets |
+| **Teachers** | Limited to assigned school and classes | View students, record attendance, upload daily reports, check homework, and create support tickets |
+| **School Managers** | School-wide management | Manage teachers, view and print reports |
+| **Organisation Admins** | Multi-school access | All School Manager features, manage staff accounts, and view reports |
+| **Writers** | Content management only | Create and edit lesson materials and seasonal events |
+| **Sales** | Customer-facing operations | Register new students and manage billing |
+| **Admins** | Full access | Configure all settings, manage roles, import/export data, and oversee all schools |
+
+
+---
+
+## Parents
+Use the parent dashboard to add children, adjust their icons, check homework pages, and view test results, as well as historical level changes. Parents can also print reports for their children.
+
+<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Teachers
-
-### Homepage
-
-<Image src="/materials/teacher_profile.avif" alt="Teacher homepage" width={1200} height={800} />
-
-### Student list
-
-<Image src="/materials/student_list.avif" alt="Student list" width={1200} height={800} />
-
-### Test Results
-
-<Image src="/materials/results.avif" alt="Results" width={1200} height={800} />
+Use the teacher dashboard to view the calendar, lessons, and homework, and to add test results. Teachers can view only the students and lessons assigned to them.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
-<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## School Managers
-
-### Support requests
-
-<Image src="/materials/support.avif" alt="Support" width={1200} height={800} />
+Managers have access to all data for their school. They can approve teacher reports, manage school events, and handle support requests.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
-<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Organisation Admins
+Organisation Admins manage multiple schools under the same organisation. They have the same visibility as School Managers, but across all schools under their purview.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
-<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
-## Curriculum Team
+## Writers
+Writers can create or edit lesson materials and event content that they create or are assigned to. They don’t have access to student data.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
-<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Sales
+Sales users can manage student registrations and payment-related records but can’t view lesson data. This role is still being fleshed out.
 
 <hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
-<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Admins
+Admins have full control of the system. They can manage all users, permissions, data exports, and system-wide configurations. The lead developer and Daniel’s account also have access to additional restricted options, such as removing other admins.
 
-<hr class="!mt-12 h-1 bg-[#f4bb8c] rounded-xl" />
-<hr class="h-1 bg-[#f4bb8c] rounded-xl" />
 
 ## Tech Stack
 
@@ -141,7 +143,7 @@ I defined a convenience method `#is?` on the User model to replace the `#admin?/
   - Have a special overview statistics dashboard of test results
 - Can view the courses their organisation is signed up for and the categories/lessons they grant access to
 
-#### Curriculum Team
+#### Writer
 
 - Can create new (unreleased) lessons
 - Can propose changes to existing lessons
