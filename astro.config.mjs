@@ -14,6 +14,11 @@ export default defineConfig({
       favicon: "/favicon.svg",
       sidebar: [
         {
+          label: "AI-Sensei",
+          collapsed: true,
+          autogenerate: { directory: "ai-sensei" },
+        },
+        {
           label: "Guides",
           collapsed: true,
           autogenerate: { directory: "guides" },
